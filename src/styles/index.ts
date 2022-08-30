@@ -6,7 +6,8 @@ const GlobalStyle = createGlobalStyle`
         --yellow: #FFC124;
 
         //gray scale pallete
-        --grey-3: #151515;
+        --grey-4: #151515;
+        --grey-3:#212121;
         --grey-2: #383838;
         --grey-1: #D9D9D9;
         --grey-0: #F0F0F0;
@@ -20,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
         height: 100vh;
         margin: 0;
         padding: 0;
-        background: var(--grey-4);
+        background: var(--grey-3);
         font-family: 'Montserrat', sans-serif;
 
     }
