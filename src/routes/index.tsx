@@ -6,6 +6,7 @@ const MainRoutes = () => {
             <Route path="/login" /*element={<login/>}*//>
             <Route path="/register" /*element={<register/>}*//>
             <Route path="/dashboard" /*element={<dashboard/>}*/ />
+            <Route path="/community"/>
             <Route path="*" element={<Navigate to={"/login"}/>}/>
         </Routes>
     )
