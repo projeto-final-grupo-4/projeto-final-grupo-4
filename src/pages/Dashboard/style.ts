@@ -40,6 +40,9 @@ export const DashboardHeaderStyled = styled.div`
 
       cursor: pointer;
     }
+    a {
+      color: var(--yellow);
+    }
   }
 `;
 
@@ -83,9 +86,6 @@ export const Details = styled.div`
     font-weight: 500;
     font-size: 1rem;
   }
-  nav ul li {
-    cursor: pointer;
-  }
 `;
 export const DashboardSubHeaderStyled = styled.div`
   margin: 0 auto;
@@ -125,6 +125,21 @@ export const DashboardSubHeaderStyled = styled.div`
   div nav > ul li {
     cursor: pointer;
   }
+  .navigation_buttons:hover {
+    color: var(--yellow);
+    transition: 0.3s;
+  }
+  .navigation_buttons {
+    color: var(--grey-0);
+    font-size: 0.8rem;
+    font-weight: 500;
+    background-color: transparent;
+    border: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   div form {
     /* background-color: blue; */
@@ -153,6 +168,9 @@ export const DashboardSubHeaderStyled = styled.div`
   }
 
   @media (min-width: 425px) {
+    .navigation_buttons {
+      font-size: 0.9rem;
+    }
     div form input {
       width: 130px;
     }
@@ -161,6 +179,9 @@ export const DashboardSubHeaderStyled = styled.div`
     }
   }
   @media (min-width: 768px) {
+    .navigation_buttons {
+      font-size: 1rem;
+    }
     div form input {
       width: 200px;
     }
@@ -208,6 +229,8 @@ export const DashboardMainStyled = styled.main`
     width: 98.8;
     height: 146.8px;
 
+    background-color: rgba(18, 18, 18, 90%);
+
     border-radius: 8px;
 
     position: relative;
@@ -218,17 +241,29 @@ export const DashboardMainStyled = styled.main`
     height: 100%;
     border-radius: 8px;
   }
-  .card button {
+  .card .button_box {
     position: absolute;
-    top: 40%;
-    left: 37%;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    opacity: 1;
 
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .button_box button {
     border: none;
     border-radius: 100px;
     width: 30px;
     height: 30px;
 
-    background-color: rgba(217, 217, 217, 70%);
+    background-color: rgba(22, 22, 22, 90%);
+    color: var(--grey-0);
 
     display: flex;
     justify-content: center;
@@ -238,7 +273,7 @@ export const DashboardMainStyled = styled.main`
   }
   .card:hover button {
     opacity: 1;
-    transition: 0.5s;
+    transition: 0.8s;
   }
   .card:hover {
     transform: scale(1.05);
@@ -248,17 +283,48 @@ export const DashboardMainStyled = styled.main`
     width: 100%;
     height: 100%;
   }
+  .card .title_box {
+    width: 100%;
+    min-height: 70px;
+
+    background-color: rgba(18, 18, 18, 90%);
+    color: var(--grey-0);
+    border-radius: 0px 0px 8px 8px;
+
+    position: absolute;
+    bottom: 0px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+
+    font-size: 0.8rem;
+  }
+
+  .card div h5 {
+    width: 90%;
+    text-align: center;
+  }
 
   @media (min-width: 768px) {
     .card {
       width: 148.2px;
       height: 220.2px;
     }
+    .card:hover .title_box {
+      opacity: 1;
+      transition: 0.5s;
+    }
   }
   @media (min-width: 1024px) {
     .card {
       width: 247px;
       height: 367px;
+    }
+    .card:hover .title_box {
+      font-size: 1rem;
     }
   }
 `;
