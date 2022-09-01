@@ -1,8 +1,15 @@
-import { CommunityHeader, HeaderButton, HeaderNavigation } from "./style";
+import { CommunityHeader, HeaderButton, HeaderNavigation, MainContent } from "./style";
+import { useContext } from "react";
+import { CommunityContext } from "../../contexts/CommunityContext";
+
 import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
 import { HiUserCircle } from "react-icons/hi";
+import { BsFillChatLeftTextFill } from "react-icons/bs"
 
 const Community = () => {
+
+  const {opinions, getOpinions} = useContext(CommunityContext)
+
   return (
     <>
       <CommunityHeader>
@@ -12,7 +19,7 @@ const Community = () => {
             <AiOutlineHome />
           </HeaderButton>
           <HeaderButton>
-            <HiUserCircle />
+            <HiUserCircle/>
           </HeaderButton>
         </span>
       </CommunityHeader>
@@ -22,7 +29,9 @@ const Community = () => {
             <span>
                 <nav>
                     <ul>
-                        <li>Filmes</li>
+                        <li>
+                          <button onClick={getOpinions}>Filmes</button>
+                        </li>
                         <li>Séries</li>
                         <li>Categorias</li>
                     </ul>
@@ -36,6 +45,32 @@ const Community = () => {
             </span>
         </div>
       </HeaderNavigation>
+      <MainContent>
+        <ul>
+        {
+            opinions.map((opinion) => {
+              return(
+                <li key={opinion.id}>
+                  <div className="mediaInfo">
+                    <img src="" alt="text"/>
+                    <h3>Título</h3>
+                    <p>Rate</p>
+                  </div>
+                  <div className="userInfo">
+                    <img src="" alt="" />
+                    <h3>Usuário</h3>
+                  </div>
+                  <p className="content">{opinion.content}</p>
+                  <span>
+                    <p>{opinion.rate}</p>
+                    <button><BsFillChatLeftTextFill/></button>
+                  </span>
+                </li>
+              )
+            })  
+        }
+        </ul>
+      </MainContent>
     </>
   );
 };

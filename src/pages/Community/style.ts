@@ -69,6 +69,15 @@ export const HeaderNavigation = styled.div`
         padding: 5px;
     }
 
+    .header_navigation nav ul li button {
+        background-color: transparent;
+        border: none;
+        color: var(--grey-0);
+        font-weight: 600;
+        font-size: 17px;
+        padding: 0px;
+    }
+
     .header_navigation form input {
         width: 80%;
         border-radius: 5px;
@@ -106,5 +115,63 @@ export const HeaderNavigation = styled.div`
             width: 100%;
             justify-content: space-evenly;
         }
+    }
+`
+
+export const MainContent = styled.main`
+
+    ul li {
+        background-color: var(--grey-2);
+        width: 302px;
+        height: 292px;
+        border-radius: 10px;
+        margin: 10px;
+    }
+
+    ul li .mediaInfo {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    ul li .mediaInfo img {
+        width: 48px;
+        height: 74px;
+        margin: 10px;
+        border: solid 1px #fff;
+        border-radius: 10px;
+    }
+
+    ul li .mediaInfo p {
+        margin-right: 10px;
+    }
+
+    ul li .userInfo {
+        display: flex;
+        align-items: center;
+        margin: 10px;
+    }
+
+    ul li .userInfo img {
+        margin-right: 10px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: solid 1px #fff;
+    }
+
+    ul li .content {
+        margin: 10px;
+    }
+
+    ul li span {
+        display: flex;
+        margin: 10px;
+        justify-content: space-between;
+    }
+
+    ul li span button {
+        background-color: transparent;
+        border: none;
+        color: var(--yellow);
     }
 `
