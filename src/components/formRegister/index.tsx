@@ -3,13 +3,30 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useNavigate } from "react-router-dom"
 import { RegisterForm, ButtonRegister } from "./styles"
+import api from "../../services/api"
+import { FieldValue } from "react-hook-form"
 
-export interface IRegister {
+export interface IUser {
     name: string
     photo: string
     email: string
     password: string
     confirmPassword: string
+    avatar: string
+    watch_later: []
+    onSubmit: (data :IUserData) => void
+}
+
+export interface IUserData{
+    name: string
+    email: string
+    password: Number
+    avatar: string
+    watch_later: []
+}
+
+export interface IUserContext {
+    onSubmit: (data : FieldValue<IUserData>) => void
 }
 
 
@@ -29,22 +46,33 @@ export interface IRegister {
             /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\.*])(?=.{8,})/,
             "Deve conter 8 caraceteres, uma maiúscula, uma minúscula, um número e um caracter especial"),
         
-        confirmPassword: yup.string().required("Campo obrigatório").oneOf([yup.ref("password"), null], 'Senhas não conferem'),
+        confirmPassword: yup.string().required('Campo obrigatório').oneOf([yup.ref('password'), null], 'Senhas não conferem'),
     })
 
     const { 
         register, 
         handleSubmit, 
         formState: { errors }, 
-        } = useForm<IRegister>({
+        } = useForm<IUser>({
         resolver: yupResolver(schema),
     })
 
+    const onSubmit = (data: FieldValue<IUserContext>) => {
+        console.log(data)
+        api.post('users', data)
+        .then((response) =>{
+            console.log(response)
+            window.localStorage.setItem("token", response.data.token)
+            navigate('/login')
+        })
+        .catch((error) => console.error(error))
+    }
+
     return(
         <>
-            <RegisterForm>
+            <RegisterForm onSubmit={handleSubmit(onSubmit)}>
                 <h1>Cadastrar</h1>
-                <input type='email' placeholder='Nome' {...register('name')}/>
+                <input type='text' placeholder='Nome' {...register('name')}/>
                 <span>{errors.email?.message}</span>
                 <input type='text' placeholder='Foto' {...register('photo')} />
                 <span>{errors.password?.message}</span>
@@ -54,7 +82,7 @@ export interface IRegister {
                 <span>{errors.password?.message}</span>
                 <input type='password' placeholder='Confirmar senha' {...register('confirmPassword')} />
                 <span>{errors.password?.message}</span>
-                <ButtonRegister onClick={() => navigate('/login')}>Cadastrar</ButtonRegister>
+                <ButtonRegister type='submit'>Cadastrar</ButtonRegister>
             </RegisterForm>
         </>
     )
