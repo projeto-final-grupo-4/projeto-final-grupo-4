@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useEffect } from "react";
 
 import {
   DashboardHeaderStyled,
@@ -14,34 +14,22 @@ import { FaRegPlayCircle } from "react-icons/fa";
 
 import Button from "../../components/Button";
 
-import api from "../../services/api";
-
-// interface IFilmes {
-//   alt_genres: string;
-//   genre: string;
-//   id: number;
-//   poster: string;
-//   rate: number;
-//   rating: number;
-//   sinopse: string;
-//   title: string;
-//   trailer: string;
-//   type: string;
-//   year: string;
-// }
+import { useDashboardContext } from "../../context/dashboardContext";
+import { Link, Navigate } from "react-router-dom";
 
 const Dashboard = () => {
-  // const [movies, setMovies] = useContext<IFilmes[]>([]);
+  const {
+    actualSection,
+    loadMovies,
+    loadSeries,
+    handleFilterMovies,
+    handleFilterSeries,
+  } = useDashboardContext();
 
-  async function getData() {
-    const data = await api
-      .get("movies")
-      .then((res: any) => console.log(res))
-      .catch((err: any) => err);
-
-    return data;
-  }
-  getData();
+  useEffect(() => {
+    loadMovies();
+    loadSeries();
+  }, []);
 
   return (
     <DashboardStyled>
@@ -52,7 +40,9 @@ const Dashboard = () => {
           </div>
 
           <div id="header_user">
-            <HiUserGroup className="community_icon" />
+            <Link to={"/community"}>
+              <HiUserGroup className="community_icon" />
+            </Link>
             <Details>
               <details>
                 <summary>
@@ -76,9 +66,23 @@ const Dashboard = () => {
           <div>
             <nav>
               <ul>
-                <li>Filmes</li>
-                <li>Séries</li>
-                <li>Categorias</li>
+                <li
+                  onClick={() => {
+                    handleFilterMovies();
+                  }}
+                >
+                  <button className="navigation_buttons">Filmes</button>
+                </li>
+                <li
+                  onClick={() => {
+                    handleFilterSeries();
+                  }}
+                >
+                  <button className="navigation_buttons">Séries</button>
+                </li>
+                <li onClick={() => console.log("oi")}>
+                  <button className="navigation_buttons">Categorias</button>
+                </li>
               </ul>
             </nav>
             <form action="">
@@ -92,96 +96,121 @@ const Dashboard = () => {
       </header>
 
       <DashboardMainStyled>
-        <h2>Seção</h2>
+        <h2>{actualSection[0]?.type === "movie" ? "Filmes" : "Séries"}</h2>
 
         <section>
           <ul>
-            <li className="card">
-              <img
-                src="https://i.pinimg.com/originals/67/4a/bc/674abc2b24b4c2e2ea1c82ac9d8f3f8d.jpg"
-                alt=""
-              />
-              <button>
-                <FaRegPlayCircle />
-              </button>
-            </li>
-            <li className="card">
-              <img
-                src="https://i.pinimg.com/originals/67/4a/bc/674abc2b24b4c2e2ea1c82ac9d8f3f8d.jpg"
-                alt=""
-              />
-              <button>
-                <FaRegPlayCircle />
-              </button>
-            </li>
-            <li className="card">
-              <img
-                src="https://i.pinimg.com/originals/67/4a/bc/674abc2b24b4c2e2ea1c82ac9d8f3f8d.jpg"
-                alt=""
-              />
-              <button>
-                <FaRegPlayCircle />
-              </button>
-            </li>
-            <li className="card">
-              <img
-                src="https://i.pinimg.com/originals/67/4a/bc/674abc2b24b4c2e2ea1c82ac9d8f3f8d.jpg"
-                alt=""
-              />
-              <button>
-                <FaRegPlayCircle />
-              </button>
-            </li>
-            <li className="card">
-              <img
-                src="https://i.pinimg.com/originals/67/4a/bc/674abc2b24b4c2e2ea1c82ac9d8f3f8d.jpg"
-                alt=""
-              />
-              <button>
-                <FaRegPlayCircle />
-              </button>
-            </li>
-            <li className="card">
-              <img
-                src="https://i.pinimg.com/originals/67/4a/bc/674abc2b24b4c2e2ea1c82ac9d8f3f8d.jpg"
-                alt=""
-              />
-              <button>
-                <FaRegPlayCircle />
-              </button>
-            </li>
-            <li className="card">
-              <img
-                src="https://i.pinimg.com/originals/67/4a/bc/674abc2b24b4c2e2ea1c82ac9d8f3f8d.jpg"
-                alt=""
-              />
-              <button>
-                <FaRegPlayCircle />
-              </button>
-            </li>
-            <li className="card">
-              <img
-                src="https://i.pinimg.com/originals/67/4a/bc/674abc2b24b4c2e2ea1c82ac9d8f3f8d.jpg"
-                alt=""
-              />
-              <button>
-                <FaRegPlayCircle />
-              </button>
-            </li>
-            <li className="card">
-              <img
-                src="https://i.pinimg.com/originals/67/4a/bc/674abc2b24b4c2e2ea1c82ac9d8f3f8d.jpg"
-                alt=""
-              />
-              <button>
-                <FaRegPlayCircle />
-              </button>
-            </li>
+            {actualSection.map((movie) => {
+              return (
+                <li className="card" key={movie.id}>
+                  <img src={movie.poster} alt={movie.title} />
+                  <div className="button_box">
+                    <button>
+                      <FaRegPlayCircle />
+                    </button>
+                  </div>
+                  <div className="title_box">
+                    <h5>{movie.title}</h5>
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </section>
       </DashboardMainStyled>
     </DashboardStyled>
   );
 };
+
+//  return isLogged? (
+//   <DashboardStyled>
+//     <header>
+//       <DashboardHeaderStyled>
+//         <div id="header_logo">
+//           <h2>LOGO/NOME</h2>
+//         </div>
+
+//         <div id="header_user">
+//           <Link to={"/community"}>
+//             <HiUserGroup className="community_icon" />
+//           </Link>
+//           <Details>
+//             <details>
+//               <summary>
+//                 <HiUserCircle className="user_icon" />
+//               </summary>
+//               <div className="details">
+//                 <nav>
+//                   <ul>
+//                     <li>Configurações</li>
+//                     <li>Minha Lista</li>
+//                     <li>Meus Reviews</li>
+//                   </ul>
+//                   <Button>Logout</Button>
+//                 </nav>
+//               </div>
+//             </details>
+//           </Details>
+//         </div>
+//       </DashboardHeaderStyled>
+//       <DashboardSubHeaderStyled>
+//         <div>
+//           <nav>
+//             <ul>
+//               <li
+//                 onClick={() => {
+//                   handleFilterMovies();
+//                 }}
+//               >
+//                 <button className="navigation_buttons">Filmes</button>
+//               </li>
+//               <li
+//                 onClick={() => {
+//                   handleFilterSeries();
+//                 }}
+//               >
+//                 <button className="navigation_buttons">Séries</button>
+//               </li>
+//               <li onClick={() => console.log("oi")}>
+//                 <button className="navigation_buttons">Categorias</button>
+//               </li>
+//             </ul>
+//           </nav>
+//           <form action="">
+//             <input type="text" />
+//             <button>
+//               <AiOutlineSearch />
+//             </button>
+//           </form>
+//         </div>
+//       </DashboardSubHeaderStyled>
+//     </header>
+
+//     <DashboardMainStyled>
+//       <h2>{actualSection[0]?.type === "movie" ? "Filmes" : "Séries"}</h2>
+
+//       <section>
+//         <ul>
+//           {actualSection.map((movie) => {
+//             return (
+//               <li className="card" key={movie.id}>
+//                 <img src={movie.poster} alt={movie.title} />
+//                 <div className="button_box">
+//                   <button>
+//                     <FaRegPlayCircle />
+//                   </button>
+//                 </div>
+//                 <div className="title_box">
+//                   <h5>{movie.title}</h5>
+//                 </div>
+//               </li>
+//             );
+//           })}
+//         </ul>
+//       </section>
+//     </DashboardMainStyled>
+//   </DashboardStyled>)
+//   : (<Navigate to={'/login'} replace={true}></Navigate>)
+// };
 
 export default Dashboard;

@@ -1,13 +1,16 @@
 import React from "react";
 import "./App.css";
+import DashboardProvider from "./context/dashboardContext";
 import MainRoutes from "./routes";
 import GlobalStyle from "./styles";
 
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <MainRoutes />
+      <DashboardProvider>
+        <GlobalStyle />
+        <MainRoutes />
+      </DashboardProvider>
     </>
   );
 }
