@@ -1,13 +1,20 @@
-import React from 'react';
-import './App.css';
-import Routes from './routes'
-import { Global } from './styles';
+
+import React from "react";
+import "./App.css";
+import DashboardProvider from "./context/dashboardContext";
+import MainRoutes from "./routes";
+import GlobalStyle from "./styles";
+
 
 function App() {
   return (
     <>
-      <Global />
-      <Routes />
+
+      <DashboardProvider>
+        <GlobalStyle />
+        <MainRoutes />
+      </DashboardProvider>
+
     </>
   );
 }
