@@ -44,10 +44,10 @@ const Dashboard = () => {
               <HiUserGroup className="community_icon" />
             </Link>
             <Details>
-              <details>
-                <summary>
-                  <HiUserCircle className="user_icon" />
-                </summary>
+              <div>
+                <div className="user_icon">
+                  <HiUserCircle />
+                </div>
                 <div className="details">
                   <nav>
                     <ul>
@@ -58,7 +58,7 @@ const Dashboard = () => {
                     <Button>Logout</Button>
                   </nav>
                 </div>
-              </details>
+              </div>
             </Details>
           </div>
         </DashboardHeaderStyled>

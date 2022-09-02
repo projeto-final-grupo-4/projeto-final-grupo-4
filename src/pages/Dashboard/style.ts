@@ -47,8 +47,6 @@ export const DashboardHeaderStyled = styled.div`
 `;
 
 export const Details = styled.div`
-  details > summary::-webkit-details-marker {
-  }
   .details {
     height: 200px;
     width: 175px;
@@ -64,10 +62,40 @@ export const Details = styled.div`
 
     position: absolute;
     top: 60px;
-    right: 10px;
+    right: -20px;
 
     z-index: 999;
+
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.2s linear;
+    /* display: none; */
   }
+  .details::before {
+    content: "";
+    border-style: solid;
+    border-width: 20px 17px 0 17px;
+    border-color: var(--yellow) transparent;
+    transform: rotate(180deg);
+    position: absolute;
+    top: -10px;
+    right: 18px;
+  }
+  .user_icon {
+    /* background-color: red; */
+  }
+  .user_icon:hover + .details {
+    visibility: visible;
+    z-index: 999;
+
+    opacity: 1;
+  }
+  .details:hover {
+    visibility: visible;
+    z-index: 999;
+    opacity: 1;
+  }
+
   nav {
     width: 90%;
     height: 90%;
@@ -157,6 +185,16 @@ export const DashboardSubHeaderStyled = styled.div`
     background-color: var(--grey-0);
     /* max-width: 20%; */
     /* display: none; */
+  }
+  div form input:focus {
+    outline: none;
+    transform: scale(1.02);
+    transition: 0.4s;
+  }
+  div form input:focus + button {
+    outline: none;
+    transform: scale(1.02);
+    transition: 0.4s;
   }
   div form button {
     height: 30px;
