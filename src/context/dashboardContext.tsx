@@ -1,8 +1,8 @@
-import { createContext, ReactElement, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import api from "../services/api";
 
 interface IChildren {
-  children: ReactElement[];
+  children: any;
 }
 interface IMovie {
   alt_genres: string;

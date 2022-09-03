@@ -2,6 +2,7 @@
 import React from "react";
 import "./App.css";
 import DashboardProvider from "./context/dashboardContext";
+import CommunityProvider from "./context/CommunityContext";
 import MainRoutes from "./routes";
 import GlobalStyle from "./styles";
 
@@ -11,8 +12,10 @@ function App() {
     <>
 
       <DashboardProvider>
-        <GlobalStyle />
-        <MainRoutes />
+        <CommunityProvider>
+          <GlobalStyle />
+          <MainRoutes />
+        </CommunityProvider>
       </DashboardProvider>
 
     </>
