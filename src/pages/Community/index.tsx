@@ -12,7 +12,8 @@ import { HiUserCircle } from "react-icons/hi";
 import { BsFillChatLeftTextFill } from "react-icons/bs";
 
 const Community = () => {
-  const { opinions, movies, users, getMovies } = useContext(CommunityContext);
+  const { opinions, movies, users, series, getMovies } =
+    useContext(CommunityContext);
 
   return (
     <>
@@ -34,10 +35,14 @@ const Community = () => {
             <nav>
               <ul>
                 <li>
-                  <button onClick={getMovies}>Filmes</button>
+                  <button>Filmes</button>
                 </li>
-                <li>Séries</li>
-                <li>Categorias</li>
+                <li>
+                  <button>Séries</button>
+                </li>
+                <li>
+                  <button>Categoria</button>
+                </li>
               </ul>
             </nav>
             <form action="">
@@ -52,11 +57,13 @@ const Community = () => {
       <MainContent>
         <ul>
           {opinions.length === 0 ? (
-            <div className="selectGenre">Selecione um gênero</div>
+            <button onClick={getMovies} className="buttonReviews">
+              Ver reviews
+            </button>
           ) : (
             opinions.map((opinion) => {
               return (
-                opinion.moviesId !== 0 && (
+                (opinion.moviesId !== 0 && (
                   <li key={opinion.id}>
                     <div className="mediaInfo">
                       {movies.map((elem) => {
@@ -110,7 +117,62 @@ const Community = () => {
                       </span>
                     </div>
                   </li>
-                )
+                )) ||
+                (opinion.seriesId !== 0 && (
+                  <li key={opinion.id}>
+                    <div className="mediaInfo">
+                      {series.map((elem) => {
+                        return (
+                          elem.id === opinion.seriesId && (
+                            <img
+                              src={elem.poster}
+                              alt={`Poster da série ${elem.title}`}
+                            />
+                          )
+                        );
+                      })}
+                      <span className="sinopseRate">
+                        {series.map((elem) => {
+                          return (
+                            elem.id === opinion.seriesId && <p>{elem.title}</p>
+                          );
+                        })}
+                        {series.map((elem) => {
+                          return (
+                            elem.id === opinion.seriesId && (
+                              <p className="sinopse">{elem.sinopse}</p>
+                            )
+                          );
+                        })}
+                      </span>
+                    </div>
+                    <div className="userInfo">
+                      <span className="userData">
+                        {users.map((elem) => {
+                          return (
+                            elem.id === opinion.usersId && (
+                              <img src={elem.avatar} alt="" />
+                            )
+                          );
+                        })}
+                        {users.map((elem) => {
+                          return (
+                            elem.id === opinion.usersId && (
+                              <p className="sinopse">{elem.name}</p>
+                            )
+                          );
+                        })}
+                      </span>
+                      <p className="content">{opinion.content}</p>
+                      <span className="rateButton">
+                        <p>{opinion.rate}</p>
+                        <button>
+                          <BsFillChatLeftTextFill />
+                        </button>
+                      </span>
+                    </div>
+                  </li>
+                ))
               );
             })
           )}

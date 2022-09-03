@@ -40,6 +40,7 @@ interface IAxiosUsersData {
 interface IProviderProps {
   opinions: IAxiosData[];
   movies: IAxiosMovieData[];
+  series: IAxiosMovieData[];
   users: IAxiosUsersData[];
   getOpinions: () => void;
   getMovies: () => void;
@@ -52,6 +53,7 @@ export const CommunityContext = createContext<IProviderProps>(
 const CommunityProvider = ({ children }: IContextProps) => {
   const [opinions, setOpinions] = useState<IAxiosData[]>([]);
   const [movies, setMovies] = useState<IAxiosMovieData[]>([])
+  const [series, setSeries] = useState<IAxiosMovieData[]>([])
   const [users, setUsers] = useState<IAxiosUsersData[]>([])
     
   const getOpinions = () => {
@@ -68,6 +70,7 @@ const CommunityProvider = ({ children }: IContextProps) => {
       .catch((err) => console.error(err))
       getOpinions()
       getUsers()
+      getSeries()
   }
 
   const getUsers = () => {
@@ -76,9 +79,16 @@ const CommunityProvider = ({ children }: IContextProps) => {
       .then((res) => setUsers(res.data))
       .catch((err) => console.error(err))
   }
+
+  const getSeries = () => {
+    api
+      .get<IAxiosMovieData[]>("series")
+      .then((res) => setSeries(res.data))
+      .catch((err) => console.error(err))
+  }
   
   return (
-    <CommunityContext.Provider value={{ opinions, movies, getOpinions, getMovies, users }}>
+    <CommunityContext.Provider value={{ opinions, movies, series,  getOpinions, getMovies, users }}>
       {children}
     </CommunityContext.Provider>
   );
