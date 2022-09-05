@@ -1,4 +1,5 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import api from "../../services/api";
 
 import {
   DashboardHeaderStyled,
@@ -14,23 +15,61 @@ import { FaRegPlayCircle } from "react-icons/fa";
 
 import Button from "../../components/Button";
 
-import { useDashboardContext } from "../../context/dashboardContext";
+import { IMovie, useDashboardContext } from "../../context/dashboardContext";
 import { Link, Navigate } from "react-router-dom";
 
+
+
 const Dashboard = () => {
+  const [all,setAll] = useState<IMovie[]>([])
   const {
     actualSection,
+    setActualSection,
     loadMovies,
+    setMovies,
+    setSeries,
+    movies,
+    series,
     loadSeries,
     handleFilterMovies,
     handleFilterSeries,
   } = useDashboardContext();
 
   useEffect(() => {
-    loadMovies();
-    loadSeries();
-  }, []);
+    // loadMovies();
+    // loadSeries();
+    // console.log(actualSection)
+    // setActualSection(()=> [...movies,...series])
 
+    async function loadMovies() {
+      await api
+        .get("movies")
+        .then((res) => {
+          setMovies(res.data);
+          setActualSection(res.data);
+          setAll(res.data)
+          loadSeries()
+        })
+        .catch((err) => err);
+    }
+  
+    async function loadSeries() {
+      await api
+        .get("series")
+        .then((res) => {
+          setSeries(res.data)
+          setAll((old)=>[...old,...res.data])
+          setActualSection((old)=>[...old,...res.data]);
+        })
+        .catch((err) => err);
+    }
+    loadMovies()
+    
+
+    
+  }, []);
+  
+  console.log(actualSection)
   return (
     <DashboardStyled>
       <header>
@@ -100,9 +139,9 @@ const Dashboard = () => {
 
         <section>
           <ul>
-            {actualSection.map((movie) => {
+            {actualSection.map((movie,index) => {
               return (
-                <li className="card" key={movie.id}>
+                <li className="card" key={index}>
                   <img src={movie.poster} alt={movie.title} />
                   <div className="button_box">
                     <button>
