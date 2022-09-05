@@ -12,7 +12,7 @@ import { HiUserCircle } from "react-icons/hi";
 import { BsFillChatLeftTextFill } from "react-icons/bs";
 
 const Community = () => {
-  const { opinions, movies, users, series, loading,  getMovies } =
+  const { opinions, movies, users, series, loading } =
     useContext(CommunityContext);
 
   return (
@@ -56,10 +56,8 @@ const Community = () => {
       </HeaderNavigation>
       <MainContent>
         <ul>
-          {opinions.length === 0 ? (
-            <button onClick={getMovies} className="buttonReviews">
-              Ver reviews
-            </button>
+        {loading === false ? (
+            <div className="divLoading">Carregando...</div>
           ) : (
             opinions.map((opinion) => {
               return (
