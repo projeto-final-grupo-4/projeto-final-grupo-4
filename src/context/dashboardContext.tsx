@@ -1,10 +1,10 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, ReactElement, useContext, useState } from "react";
 import api from "../services/api";
 
 interface IChildren {
-  children: any;
+  children: ReactElement;
 }
-export interface IMovie {
+export interface IData {
   alt_genres: string;
   genre: string;
   id: number;
@@ -17,71 +17,34 @@ export interface IMovie {
   type: string;
   year: string;
 }
-interface ISeries {
-  alt_genres: string;
-  genre: string;
-  id: number;
-  poster: string;
-  rate: number;
-  rating: number;
-  sinopse: string;
-  title: string;
-  trailer: string;
-  type: string;
-  year: string;
-}
-
-
 interface IDashboardContext {
-  movies: IMovie[];
-  series: ISeries[];
-  setMovies: React.Dispatch<React.SetStateAction<IMovie[]>>;
-  setSeries:React.Dispatch<React.SetStateAction<ISeries[]>>;
-  loadSeries: () => void;
-  loadMovies: () => void;
-  actualSection: IMovie[] | ISeries[];
-    setActualSection: React.Dispatch<React.SetStateAction<IMovie[] | ISeries[]>>;
-  handleFilterMovies: () => void;
-  handleFilterSeries: () => void;
+  movies: IData[];
+  series: IData[];
+  all: IData[];
+  setMovies: React.Dispatch<React.SetStateAction<IData[]>>;
+  setSeries: React.Dispatch<React.SetStateAction<IData[]>>;
+  setAll: React.Dispatch<React.SetStateAction<IData[]>>;
+  actualSection: IData[];
+  setActualSection: React.Dispatch<React.SetStateAction<IData[]>>;
+  handleSearch: (data: string) => void;
 }
+
 const DashboardContext = createContext<IDashboardContext>(
   {} as IDashboardContext
 );
 
 const DashboardProvider = ({ children }: IChildren) => {
-  const [movies, setMovies] = useState<IMovie[]>([]);
-  const [series, setSeries] = useState<ISeries[]>([]);
-  const [actualSection, setActualSection] = useState<IMovie[] | ISeries[]>([]);
+  const [movies, setMovies] = useState<IData[]>([]);
+  const [series, setSeries] = useState<IData[]>([]);
+  const [all, setAll] = useState<IData[]>([]);
+  const [actualSection, setActualSection] = useState<IData[]>([]);
 
-  //   const [user, setUser] = useState<IUser>({} as IUser);
-  //   const [loading, setloading] = useState<boolean>(true);
-
-  async function loadMovies() {
-    await api
-      .get("movies")
-      .then((res) => {
-        setMovies(res.data);
-        setActualSection(res.data);
-      })
-      .catch((err) => err);
+  function handleSearch(data: string) {
+    const filter = all.filter((element) =>
+      element.title.toLowerCase().includes(data.toLowerCase().trim())
+    );
+    setActualSection(filter);
   }
-
-  async function loadSeries() {
-    await api
-      .get("series")
-      .then((res) => setSeries(res.data))
-      .catch((err) => err);
-  }
-
-  function handleFilterMovies() {
-    setActualSection(movies);
-  }
-  function handleFilterSeries() {
-    setActualSection(series);
-  }
-
-  // const data = [...series, ...movies];
-  // console.log(series);
 
   return (
     <DashboardContext.Provider
@@ -91,11 +54,10 @@ const DashboardProvider = ({ children }: IChildren) => {
         setMovies,
         setSeries,
         series,
-        loadSeries,
-        loadMovies,
         actualSection,
-        handleFilterSeries,
-        handleFilterMovies,
+        all,
+        setAll,
+        handleSearch,
       }}
     >
       {children}
