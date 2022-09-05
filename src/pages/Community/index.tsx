@@ -12,7 +12,7 @@ import { HiUserCircle } from "react-icons/hi";
 import { BsFillChatLeftTextFill } from "react-icons/bs";
 
 const Community = () => {
-  const { opinions, movies, users, series, getMovies } =
+  const { opinions, movies, users, series, loading,  getMovies } =
     useContext(CommunityContext);
 
   return (

@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useState } from 
+"react";
 import api from "../services/api";
 
 interface IContextProps {
@@ -42,6 +43,7 @@ interface IProviderProps {
   movies: IAxiosMovieData[];
   series: IAxiosMovieData[];
   users: IAxiosUsersData[];
+  loading: boolean;
   getOpinions: () => void;
   getMovies: () => void;
 }
@@ -55,6 +57,7 @@ const CommunityProvider = ({ children }: IContextProps) => {
   const [movies, setMovies] = useState<IAxiosMovieData[]>([])
   const [series, setSeries] = useState<IAxiosMovieData[]>([])
   const [users, setUsers] = useState<IAxiosUsersData[]>([])
+  const [loading, setLoading] = useState<boolean>(false);
     
   const getOpinions = () => {
     api
@@ -88,7 +91,7 @@ const CommunityProvider = ({ children }: IContextProps) => {
   }
   
   return (
-    <CommunityContext.Provider value={{ opinions, movies, series,  getOpinions, getMovies, users }}>
+    <CommunityContext.Provider value={{ opinions, movies, series, loading, getOpinions, getMovies, users }}>
       {children}
     </CommunityContext.Provider>
   );
