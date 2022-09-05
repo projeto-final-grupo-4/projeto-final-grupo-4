@@ -4,7 +4,7 @@ import api from "../services/api";
 interface IChildren {
   children: any;
 }
-interface IMovie {
+export interface IMovie {
   alt_genres: string;
   genre: string;
   id: number;
@@ -30,20 +30,17 @@ interface ISeries {
   type: string;
   year: string;
 }
-// interface ISection {
-//   actualSection: IMovie[] | ISerie[];
-// }
 
-// interface IUser {}
 
 interface IDashboardContext {
   movies: IMovie[];
   series: ISeries[];
   setMovies: React.Dispatch<React.SetStateAction<IMovie[]>>;
+  setSeries:React.Dispatch<React.SetStateAction<ISeries[]>>;
   loadSeries: () => void;
   loadMovies: () => void;
   actualSection: IMovie[] | ISeries[];
-  //   setActualSection: React.Dispatch<React.SetStateAction<IMovie[] | ISeries[]>>;
+    setActualSection: React.Dispatch<React.SetStateAction<IMovie[] | ISeries[]>>;
   handleFilterMovies: () => void;
   handleFilterSeries: () => void;
 }
@@ -89,8 +86,10 @@ const DashboardProvider = ({ children }: IChildren) => {
   return (
     <DashboardContext.Provider
       value={{
+        setActualSection,
         movies,
         setMovies,
+        setSeries,
         series,
         loadSeries,
         loadMovies,
