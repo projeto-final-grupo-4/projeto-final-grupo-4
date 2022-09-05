@@ -128,9 +128,7 @@ export const HeaderNavigation = styled.div`
 
 export const MainContent = styled.main`
 
-    .buttonReviews {
-        background-color: transparent;
-        border: none;
+    .divLoading {
         color: var(--yellow);
         font-size: 25px;
         font-weight: 600;
