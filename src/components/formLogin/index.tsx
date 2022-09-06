@@ -4,6 +4,8 @@ import * as yup from "yup";
 import { ButtonEnter, ButtonRegister, LoginForm } from "./styles";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"
+import { useState } from "react";
 
 export interface ILogin {
     name: string;
@@ -15,6 +17,7 @@ export interface ILogin {
 
 const FormLogin = () => {
 
+    const [typePassword, setTypePassword] = useState<string>("password")
 
     const navigate = useNavigate()
 
@@ -60,12 +63,31 @@ const FormLogin = () => {
         }
     }
 
+    const showPassword = (e: any) => {
+        e.preventDefault()
+        setTypePassword("text")
+    }
+
+    const hidePassword = (e: any) => {
+        e.preventDefault()
+        setTypePassword("password")
+    }
+
     return (
         <LoginForm onSubmit={handleSubmit(authLogin)}>
             <h1>Login</h1>
             <input type='email' placeholder='Email' {...register('email')} />
             <span>{errors.email?.message}</span>
-            <input type='password' placeholder='Senha' {...register('password')} />
+            <input type={typePassword} placeholder='Senha' {...register('password')} />
+            {typePassword === "password" ? (
+              <button onClick={showPassword} className="eyeButton">
+                <AiFillEye />
+              </button>
+            ) : (
+              <button onClick={hidePassword} className="eyeButton">
+                <AiFillEyeInvisible />
+              </button>
+            )}
             <span>{errors.password?.message}</span>
             <h3>Não possui uma conta?</h3>
             <ButtonRegister onClick={() => navigate('/register')}>Cadastre-se aqui</ButtonRegister>

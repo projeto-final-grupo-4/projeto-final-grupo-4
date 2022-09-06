@@ -9,7 +9,7 @@ export const LoginForm = styled.form`
     height: 502px;
     background: #F0F0F0;
     border-radius: 15px;
-
+    position: relative;
 
     h1{
         font-weight: 600;
@@ -38,7 +38,16 @@ export const LoginForm = styled.form`
         margin: 5px 0px;
     }
 
-   
+    .eyeButton {
+    border: none;
+    background-color: transparent;
+    color: #000;
+    position: absolute;
+    top: 270px;
+    left: 295px;
+    font-size: 17px;
+    cursor: pointer;
+    }
 `
 
 export const ButtonEnter = styled.button`
