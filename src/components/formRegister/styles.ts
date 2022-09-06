@@ -8,7 +8,6 @@ export const RegisterForm = styled.form`
     justify-content: center;
     width: 395px;
     height: 602px;  
-    margin-top: 450px;
     background: #F0F0F0;
     border-radius: 15px;
 
@@ -38,10 +37,12 @@ export const RegisterForm = styled.form`
         color: #383838;
         margin-bottom: 5px;
     }
-
-    @media (min-width: 769px){
-        margin-top: 150px;
+    span{
+        color: #f10;
+        margin-top: 10px;
     }
+
+
 
 `
 

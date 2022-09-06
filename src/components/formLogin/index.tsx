@@ -16,7 +16,6 @@ export interface ILogin {
 }
 
 
-
 const FormLogin = () => {
 
     const navigate = useNavigate()
@@ -39,20 +38,22 @@ const FormLogin = () => {
     const signIn = (data : any) =>{ 
         api.get('users', data)
         .then(response => {
-            console.log(response)
+            console.log(response) 
+            navigate('/dashboard')
         })
+        .catch((error) => console.error(error))
     }
     
     return(
-        <LoginForm>
-            <h1 onSubmit={handleSubmit(signIn)}>Login</h1>
+        <LoginForm onSubmit={handleSubmit(signIn)}>
+            <h1>Login</h1>
              <input type='email' placeholder='Email' {...register('email')}/>
             <span>{errors.email?.message}</span>
             <input type='password' placeholder='Senha' {...register('password')} />
             <span>{errors.password?.message}</span>
             <h3>Não possui uma conta?</h3>
             <ButtonRegister onClick={() => navigate('/register')}>Cadastre-se aqui</ButtonRegister>
-            <ButtonEnter>Entrar</ButtonEnter>
+            <ButtonEnter type="submit">Entrar</ButtonEnter>
         </LoginForm>
     )
 }

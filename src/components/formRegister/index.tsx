@@ -62,7 +62,7 @@ export interface IUserContext {
         api.post('users', data)
         .then((response) =>{
             console.log(response)
-            window.localStorage.setItem("token", response.data.token)
+            window.localStorage.setItem("token", response.data.accessToken)
             navigate('/login')
         })
         .catch((error) => console.error(error))
