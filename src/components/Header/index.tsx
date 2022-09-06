@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { DashboardHeaderStyled, Details } from "./style";
 import { HiUserGroup, HiUserCircle } from "react-icons/hi";
-import { BsFillChatLeftTextFill } from "react-icons/bs";
+import { AiOutlineHome } from "react-icons/ai";
 
 import Button from "../Button";
 
@@ -26,8 +26,8 @@ const Header = ({ isDashboard }: IHeaderProps) => {
             <HiUserGroup className="community_icon" />
           </Link>
         ) : (
-          <Link to={"/community"}>
-            <HiUserGroup className="community_icon" />
+          <Link to={"/dashboard"}>
+            <AiOutlineHome className="community_icon" />
           </Link>
         )}
 
