@@ -1,5 +1,6 @@
 import {
   CommunityHeader,
+  DetailsCategory,
   HeaderButton,
   HeaderNavigation,
   MainContent,
@@ -15,8 +16,27 @@ import Header from "../../components/Header";
 import { motion } from "framer-motion";
 
 const Community = () => {
-  const { opinions, movies, users, series, loading } =
-    useContext(CommunityContext);
+  const {
+    opinions,
+    movies,
+    users,
+    series,
+    loading,
+    opinionsAll,
+    setOpinionsAll,
+  } = useContext(CommunityContext);
+
+  const filterOpinionsMovies = () => {
+    const opinionsFiltered = opinions.filter((elem) => elem.moviesId !== 0);
+    setOpinionsAll(opinions);
+    setOpinionsAll(opinionsFiltered);
+  };
+
+  const filterOpinionsSeries = () => {
+    const opinionsFiltered = opinions.filter((elem) => elem.seriesId !== 0);
+    setOpinionsAll(opinions);
+    setOpinionsAll(opinionsFiltered);
+  };
 
   return (
     <motion.div
@@ -44,13 +64,33 @@ const Community = () => {
             <nav>
               <ul>
                 <li>
-                  <button>Filmes</button>
+                  <button onClick={filterOpinionsMovies}>Filmes</button>
                 </li>
                 <li>
-                  <button>Séries</button>
+                  <button onClick={filterOpinionsSeries}>Séries</button>
                 </li>
                 <li>
-                  <button>Categoria</button>
+                <DetailsCategory>
+                    <div>
+                      <div className="category">
+                        <span>Categorias</span>
+                      </div>
+                      <div className="details_category">
+                        <nav>
+                          <ul>
+                            <li>Ação</li>
+                            <li>Suspense</li>
+                            <li>Comédia</li>
+                            <li>Terror</li>
+                            <li>Romance</li>
+                            <li>Anime</li>
+                            <li>Reality</li>
+                            <li>Todos</li>
+                          </ul>
+                        </nav>
+                      </div>
+                    </div>
+                  </DetailsCategory>
                 </li>
               </ul>
             </nav>
@@ -68,7 +108,7 @@ const Community = () => {
           {loading === false ? (
             <div className="divLoading">Carregando...</div>
           ) : (
-            opinions.map((opinion) => {
+            opinionsAll.map((opinion) => {
               return (
                 (opinion.moviesId !== 0 && (
                   <li key={opinion.id}>

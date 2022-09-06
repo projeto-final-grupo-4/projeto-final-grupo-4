@@ -6,55 +6,73 @@ import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 
 export interface ILogin {
-  name: string;
-  email: string;
-  password: string;
-  avatar: string;
-  watch_later: [];
+    name: string;
+    email: string;
+    password: string;
+    avatar: string;
+    watch_later: [];
 }
 
 const FormLogin = () => {
-  const navigate = useNavigate();
 
-  const schema = yup.object({
-    email: yup.string().required("Email obrigatório"),
 
-    password: yup.string().required("Senha obrigatória"),
-  });
+    const navigate = useNavigate()
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ILogin>({
-    resolver: yupResolver(schema),
-  });
+    const schema = yup.object({
 
-  const signIn = (data: any) => {
-    api
-      .get("users", data)
-      .then((response) => {
-        console.log(response);
-        localStorage.setItem("@user-auth", "true");
-        navigate("/dashboard");
-      })
-      .catch((error) => console.error(error));
-  };
+        email: yup.string().required('Email obrigatório'),
 
-  return (
-    <LoginForm onSubmit={handleSubmit(signIn)}>
-      <h1>Login</h1>
-      <input type="email" placeholder="Email" {...register("email")} />
-      <span>{errors.email?.message}</span>
-      <input type="password" placeholder="Senha" {...register("password")} />
-      <span>{errors.password?.message}</span>
-      <h3>Não possui uma conta?</h3>
-      <ButtonRegister onClick={() => navigate("/register")}>
-        Cadastre-se aqui
-      </ButtonRegister>
-      <ButtonEnter type="submit">Entrar</ButtonEnter>
-    </LoginForm>
-  );
-};
+        password: yup.string().required('Senha obrigatória')
+    })
 
-export default FormLogin;
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<ILogin>({
+        resolver: yupResolver(schema),
+    })
+
+    const signIn = async () => {
+        const data: any[] = []
+        await api.get('users')
+            .then(response => {
+                console.log(response.data)
+                 localStorage.setItem("@user-auth", "true");
+                data.push(...response.data)
+            })
+            .catch((error) => console.error(error))
+
+        return data
+    }
+
+
+    const authLogin = async (data: any) => {
+        const users: any[] | null[] = await signIn()
+        console.log(users.length)
+        const obj = users.find((item: { email: string; password: string; }) => item.email === data.email && item.password === data.password)
+        if (obj !== undefined) {
+            localStorage.setItem("@USERID", `${obj.id}`)
+            navigate('/dashboard')
+        }
+        else {
+            console.log("deu ruim")
+        }
+    }
+
+    return (
+        <LoginForm onSubmit={handleSubmit(authLogin)}>
+            <h1>Login</h1>
+            <input type='email' placeholder='Email' {...register('email')} />
+            <span>{errors.email?.message}</span>
+            <input type='password' placeholder='Senha' {...register('password')} />
+            <span>{errors.password?.message}</span>
+            <h3>Não possui uma conta?</h3>
+            <ButtonRegister onClick={() => navigate('/register')}>Cadastre-se aqui</ButtonRegister>
+            <ButtonEnter type="submit">Entrar</ButtonEnter>
+        </LoginForm>
+    )
+}
+
+export default FormLogin
+
