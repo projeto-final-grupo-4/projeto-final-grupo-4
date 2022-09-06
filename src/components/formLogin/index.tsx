@@ -1,22 +1,20 @@
-import { useForm } from "react-hook-form"
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup'
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import { ButtonEnter, ButtonRegister, LoginForm } from "./styles";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 
-
 export interface ILogin {
-    name: string
-    email: string
-    password: string
-    avatar: string
-    watch_later: []
-
+    name: string;
+    email: string;
+    password: string;
+    avatar: string;
+    watch_later: [];
 }
 
-
 const FormLogin = () => {
+
 
     const navigate = useNavigate()
 
@@ -40,6 +38,7 @@ const FormLogin = () => {
         await api.get('users')
             .then(response => {
                 console.log(response.data)
+                 localStorage.setItem("@user-auth", "true");
                 data.push(...response.data)
             })
             .catch((error) => console.error(error))
@@ -76,3 +75,4 @@ const FormLogin = () => {
 }
 
 export default FormLogin
+

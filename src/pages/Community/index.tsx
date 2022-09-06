@@ -10,6 +10,7 @@ import { CommunityContext } from "../../context/CommunityContext";
 import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
 import { HiUserCircle } from "react-icons/hi";
 import { BsFillChatLeftTextFill } from "react-icons/bs";
+import Header from "../../components/Header";
 
 const Community = () => {
   const { opinions, movies, users, series, loading } =
@@ -18,7 +19,8 @@ const Community = () => {
   return (
     <>
       <CommunityHeader>
-        <h2>Nome/Logo</h2>
+        <Header isDashboard={false} />
+        {/* <h2>Nome/Logo</h2>
         <span>
           <HeaderButton>
             <AiOutlineHome />
@@ -26,7 +28,7 @@ const Community = () => {
           <HeaderButton>
             <HiUserCircle />
           </HeaderButton>
-        </span>
+        </span> */}
       </CommunityHeader>
       <HeaderNavigation>
         <div className="header_navigation">
@@ -56,7 +58,7 @@ const Community = () => {
       </HeaderNavigation>
       <MainContent>
         <ul>
-        {loading === false ? (
+          {loading === false ? (
             <div className="divLoading">Carregando...</div>
           ) : (
             opinions.map((opinion) => {
