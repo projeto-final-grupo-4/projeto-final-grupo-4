@@ -1,5 +1,4 @@
-import { createContext, ReactNode, useEffect, useState } from
-  "react";
+import { createContext, ReactNode, useEffect, useState } from "react";
 import api from "../services/api";
 
 interface IContextProps {
@@ -16,26 +15,26 @@ export interface IAxiosData {
 }
 
 export interface IAxiosMovieData {
-  id: number,
-  title: string,
-  sinopse: string,
-  year: string,
-  genre: string,
-  rating: number,
-  alt_genres: string,
-  type: string,
-  poster: string,
-  trailer: string,
-  rate: number
+  id: number;
+  title: string;
+  sinopse: string;
+  year: string;
+  genre: string;
+  rating: number;
+  alt_genres: string;
+  type: string;
+  poster: string;
+  trailer: string;
+  rate: number;
 }
 
 interface IAxiosUsersData {
-  id: number,
-  name?: string,
-  email: string,
-  password: string,
-  avatar?: string,
-  watch_later?: IAxiosMovieData[]
+  id: number;
+  name?: string;
+  email: string;
+  password: string;
+  avatar?: string;
+  watch_later?: IAxiosMovieData[];
 }
 
 interface IProviderProps {
@@ -44,8 +43,8 @@ interface IProviderProps {
   series: IAxiosMovieData[];
   users: IAxiosUsersData[];
   loading: boolean;
-  getOpinions: () => void;
-  setOpinions: React.Dispatch<React.SetStateAction<IAxiosData[]>>
+  opinionsAll: IAxiosData[];
+  setOpinionsAll: React.Dispatch<React.SetStateAction<IAxiosData[]>>;
 }
 
 export const CommunityContext = createContext<IProviderProps>(
@@ -54,15 +53,19 @@ export const CommunityContext = createContext<IProviderProps>(
 
 const CommunityProvider = ({ children }: IContextProps) => {
   const [opinions, setOpinions] = useState<IAxiosData[]>([]);
-  const [movies, setMovies] = useState<IAxiosMovieData[]>([])
-  const [series, setSeries] = useState<IAxiosMovieData[]>([])
-  const [users, setUsers] = useState<IAxiosUsersData[]>([])
+  const [movies, setMovies] = useState<IAxiosMovieData[]>([]);
+  const [series, setSeries] = useState<IAxiosMovieData[]>([]);
+  const [opinionsAll, setOpinionsAll] = useState<IAxiosData[]>([]);
+  const [users, setUsers] = useState<IAxiosUsersData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   const getOpinions = () => {
     api
       .get<IAxiosData[]>("opinions")
-      .then((res) => setOpinions(res.data))
+      .then((res) => {
+        setOpinions(res.data);
+        setOpinionsAll(res.data);
+      })
       .catch((err) => console.error(err));
   };
 
@@ -86,18 +89,28 @@ const CommunityProvider = ({ children }: IContextProps) => {
     api
       .get<IAxiosUsersData[]>("users")
       .then((res) => setUsers(res.data))
-      .catch((err) => console.error(err))
-  }
+      .catch((err) => console.error(err));
+  };
 
   const getSeries = () => {
     api
       .get<IAxiosMovieData[]>("series")
       .then((res) => setSeries(res.data))
-      .catch((err) => console.error(err))
-  }
+      .catch((err) => console.error(err));
+  };
 
   return (
-    <CommunityContext.Provider value={{ opinions, movies, series, loading, getOpinions, users, setOpinions }}>
+    <CommunityContext.Provider
+      value={{
+        opinions,
+        movies,
+        series,
+        loading,
+        users,
+        opinionsAll,
+        setOpinionsAll
+      }}
+    >
       {children}
     </CommunityContext.Provider>
   );
