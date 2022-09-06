@@ -5,7 +5,7 @@ import {
   MainContent,
 } from "./style";
 import { useContext } from "react";
-import { CommunityContext } from "../../context/CommunityContext";
+import { CommunityContext } from "../../context/communityContext";
 
 import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
 import { HiUserCircle } from "react-icons/hi";

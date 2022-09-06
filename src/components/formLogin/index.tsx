@@ -7,12 +7,12 @@ import api from "../../services/api";
 
 
 export interface ILogin {
-    name:string
+    name: string
     email: string
     password: string
     avatar: string
     watch_later: []
-    
+
 }
 
 
@@ -20,33 +20,34 @@ export interface ILogin {
 const FormLogin = () => {
 
     const navigate = useNavigate()
-    
+
     const schema = yup.object({
-    
+
         email: yup.string().required('Email obrigatório'),
-        
+
         password: yup.string().required('Senha obrigatória')
     })
 
-    const { 
-        register, 
-        handleSubmit, 
-        formState: { errors }, 
-        } = useForm<ILogin>({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<ILogin>({
         resolver: yupResolver(schema),
     })
 
-    const signIn = (data : any) =>{ 
+    const signIn = (data: any) => {
         api.get('users', data)
-        .then(response => {
-            console.log(response)
-        })
+            .then(response => {
+                console.log(response)
+                localStorage.setItem("token", response.data.token)
+            })
     }
-    
-    return(
+
+    return (
         <LoginForm>
             <h1 onSubmit={handleSubmit(signIn)}>Login</h1>
-             <input type='email' placeholder='Email' {...register('email')}/>
+            <input type='email' placeholder='Email' {...register('email')} />
             <span>{errors.email?.message}</span>
             <input type='password' placeholder='Senha' {...register('password')} />
             <span>{errors.password?.message}</span>

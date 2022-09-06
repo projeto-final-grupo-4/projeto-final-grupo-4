@@ -2,7 +2,7 @@
 import React from "react";
 import "./App.css";
 import DashboardProvider from "./context/dashboardContext";
-import CommunityProvider from "./context/CommunityContext";
+import CommunityProvider from "./context/communityContext";
 import MainRoutes from "./routes";
 import GlobalStyle from "./styles";
 

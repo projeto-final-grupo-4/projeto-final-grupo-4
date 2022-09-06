@@ -114,6 +114,13 @@ export const Details = styled.div`
     font-weight: 500;
     font-size: 1rem;
   }
+  nav ul li button {
+    background-color: var(--yellow);
+    border: none;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'Montserrat', sans serif;
+  }
 `;
 export const DashboardSubHeaderStyled = styled.div`
   margin: 0 auto;
