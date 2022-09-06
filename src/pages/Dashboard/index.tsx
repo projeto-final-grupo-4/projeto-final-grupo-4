@@ -13,8 +13,12 @@ import {
 import { AiOutlineSearch } from "react-icons/ai";
 import { HiUserGroup, HiUserCircle } from "react-icons/hi";
 import { FaRegPlayCircle } from "react-icons/fa";
+import { BsFillGearFill, BsCardList, BsChatLeft } from 'react-icons/bs'
 
 import Button from "../../components/Button";
+import ModalEditProfile from "../../components/Modals/modalEditProfile";
+import ModalMovieInformations from "../../components/Modals/modalMovieInformations";
+import ModalAddReview from "../../components/Modals/modalAddReview";
 
 import { IData, useDashboardContext } from "../../context/dashboardContext";
 import { Link, Navigate } from "react-router-dom";
@@ -33,6 +37,13 @@ const Dashboard = () => {
     all,
     setAll,
     handleSearch,
+    setModalEditProfile,
+    setModalMovieInformations,
+    setSelectMovie,
+    setSinopse,
+    setRate,
+    setVideo,
+    setPoster
   } = useDashboardContext();
 
   useEffect(() => {
@@ -67,6 +78,7 @@ const Dashboard = () => {
 
   return (
     <DashboardStyled>
+      <ModalMovieInformations />
       <header>
         <DashboardHeaderStyled>
           <div id="header_logo">
@@ -85,9 +97,9 @@ const Dashboard = () => {
                 <div className="details">
                   <nav>
                     <ul>
-                      <li>Configurações</li>
-                      <li>Minha Lista</li>
-                      <li>Meus Reviews</li>
+                      <li><BsFillGearFill /><button onClick={() => setModalEditProfile(true)} >Configurações</button></li>
+                      <li><BsCardList /><button>Minha Lista</button></li>
+                      <li><BsChatLeft /><button>Meus Reviews</button></li>
                     </ul>
                     <Button>Logout</Button>
                   </nav>
@@ -251,10 +263,19 @@ const Dashboard = () => {
         <h2>{title}</h2>
 
         <section>
+          <ModalAddReview />
+          <ModalEditProfile />
           <ul>
             {actualSection.map((movie, index) => {
               return (
-                <li className="card" key={index}>
+                <li className="card" key={index} onClick={() => {
+                  setModalMovieInformations(true);
+                  setSelectMovie(movie.title);
+                  setSinopse(movie.sinopse);
+                  setRate(movie.rate);
+                  setVideo(movie.trailer);
+                  setPoster(movie.poster)
+                }}>
                   <img src={movie.poster} alt={movie.title} />
                   <div className="button_box">
                     <button>

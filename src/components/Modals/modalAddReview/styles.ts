@@ -12,10 +12,20 @@ export const DivModalAddReview = styled.div`
     padding-left: 0 auto;
     padding: 1vh 1vw;
     z-index: 1;
+
+@media screen and (min-width: 423px) {
+    width: 60vw;
+    margin-left: 20vw;
+}
+
+@media screen and (min-width: 800px) {
+    width: 30vw;
+    margin-left: 30vw;
+}
 `
 
 export const DivMovieInformation = styled.div`
-width: 100%;
+width: 50%;
 height: 100%;
 display: flex;
 flex-direction: column;
@@ -55,6 +65,7 @@ height: 100%;
 div{
     display: flex;
     justify-content: space-between;
+    width: 100%;
 }
 
 h2{
@@ -69,18 +80,18 @@ button{
 }
 `
 
-export const FormAddReview = styled.div`
+export const FormAddReview = styled.form`
 display: flex;
 flex-direction: column;
 width: 100%;
 height: 100%;
-align-items: center;
-padding-left: 0;
-padding: 1vh 1vw;
+align-items: flex-start;
+padding: 1vh 0vw;
 
 input{
     height: 70%;
     margin-bottom: 1vh;
+    width: 90%;
 }
 
 label{
@@ -89,6 +100,9 @@ label{
     display: flex;
     flex-direction: column;
     margin-bottom: 1vh;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 select{

@@ -17,9 +17,11 @@ import { useDashboardContext } from "../../../context/dashboardContext";
 
 import api from "../../../services/api";
 import { SubmitHandler } from "react-hook-form";
+import { type } from "@testing-library/user-event/dist/type";
+import { json } from "stream/consumers";
 
 function ModalEditProfile() {
-  const token = localStorage.getItem("token");
+  const id = localStorage.getItem("@USERID");
 
   interface IUser {
     name: string;
@@ -35,18 +37,12 @@ function ModalEditProfile() {
   const { setModalEditProfile, modalEditProfile } = useDashboardContext();
 
   const formSchema = yup.object().shape({
-    name: yup.string().required("Nome obrigatório"),
+    name: yup.string(),
     password: yup
-      .string()
-      .required("Senha obrigatória")
-      .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        "Senha inválida. Deve conter conter no mínimo uma letra minúscula, uma maiúscula, um número, um caractere especial e com o comprimento mínimo de oito caracteres"
-      ),
-    avatar: yup.string().required("Foto obrigatória"),
+      .string(),
+    avatar: yup.string(),
     confirmPassword: yup
       .string()
-      .required("Confirmação obrigatória")
       .oneOf([yup.ref("password"), null], "As senhas devem ser iguais"),
   });
 
@@ -60,15 +56,16 @@ function ModalEditProfile() {
 
   const onSubmitFunction = (
     data: any,
-    id: BaseSyntheticEvent<object, any, any> | undefined
   ) => {
     console.log(data);
+    console.log(id)
     api
       .patch(`users/${id}`, data, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { "Content-Type": "application/json" },
       })
       .then((response) => {
         console.log(response);
+        setModalEditProfile(false)
       })
       .catch((error) => console.error(error));
   };

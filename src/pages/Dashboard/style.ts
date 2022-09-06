@@ -117,7 +117,15 @@ export const Details = styled.div`
   nav ul li {
     cursor: pointer;
   }
-`;
+
+  nav ul li button {
+    background-color: var(--yellow);
+    border: none;
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'Montserrat', sans serif;
+  }
+`
 export const DetailsCategory = styled.div`
   position: relative;
 

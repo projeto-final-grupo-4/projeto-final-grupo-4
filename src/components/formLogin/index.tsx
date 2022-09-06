@@ -7,47 +7,64 @@ import api from "../../services/api";
 
 
 export interface ILogin {
-    name:string
+    name: string
     email: string
     password: string
     avatar: string
     watch_later: []
-    
+
 }
 
 
 const FormLogin = () => {
 
     const navigate = useNavigate()
-    
+
     const schema = yup.object({
-    
+
         email: yup.string().required('Email obrigatório'),
-        
+
         password: yup.string().required('Senha obrigatória')
     })
 
-    const { 
-        register, 
-        handleSubmit, 
-        formState: { errors }, 
-        } = useForm<ILogin>({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<ILogin>({
         resolver: yupResolver(schema),
     })
 
-    const signIn = (data : any) =>{ 
-        api.get('users', data)
-        .then(response => {
-            console.log(response) 
-            navigate('/dashboard')
-        })
-        .catch((error) => console.error(error))
+    const signIn = async () => {
+        const data: any[] = []
+        await api.get('users')
+            .then(response => {
+                console.log(response.data)
+                data.push(...response.data)
+            })
+            .catch((error) => console.error(error))
+
+        return data
     }
-    
-    return(
-        <LoginForm onSubmit={handleSubmit(signIn)}>
+
+
+    const authLogin = async (data: any) => {
+        const users: any[] | null[] = await signIn()
+        console.log(users.length)
+        const obj = users.find((item: { email: string; password: string; }) => item.email === data.email && item.password === data.password)
+        if (obj !== undefined) {
+            localStorage.setItem("@USERID", `${obj.id}`)
+            navigate('/dashboard')
+        }
+        else {
+            console.log("deu ruim")
+        }
+    }
+
+    return (
+        <LoginForm onSubmit={handleSubmit(authLogin)}>
             <h1>Login</h1>
-             <input type='email' placeholder='Email' {...register('email')}/>
+            <input type='email' placeholder='Email' {...register('email')} />
             <span>{errors.email?.message}</span>
             <input type='password' placeholder='Senha' {...register('password')} />
             <span>{errors.password?.message}</span>
