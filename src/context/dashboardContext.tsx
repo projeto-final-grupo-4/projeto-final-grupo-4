@@ -27,6 +27,22 @@ interface IDashboardContext {
   actualSection: IData[];
   setActualSection: React.Dispatch<React.SetStateAction<IData[]>>;
   handleSearch: (data: string) => void;
+  modalEditProfile: boolean;
+  setModalEditProfile: (modalEditProfile: boolean) => void;
+  modalAddReview: boolean;
+  setModalAddReview: (modalAddReview: boolean) => void;
+  modalMovieInformations: boolean;
+  setModalMovieInformations: (modalMovieInformations: boolean) => void;
+  selectMovie: string;
+  setSelectMovie: (movie: string) => void;
+  sinopse: string;
+  setSinopse: (sinopse: string) => void;
+  rate: number;
+  setRate: (rate: number) => void;
+  video: string;
+  setVideo: (video: string) => void;
+  poster: string;
+  setPoster: (poster: string) => void;
 }
 
 const DashboardContext = createContext<IDashboardContext>(
@@ -38,6 +54,14 @@ const DashboardProvider = ({ children }: IChildren) => {
   const [series, setSeries] = useState<IData[]>([]);
   const [all, setAll] = useState<IData[]>([]);
   const [actualSection, setActualSection] = useState<IData[]>([]);
+  const [modalEditProfile, setModalEditProfile] = useState<boolean>(false);
+  const [modalAddReview, setModalAddReview] = useState<boolean>(false);
+  const [modalMovieInformations, setModalMovieInformations] = useState<boolean>(false);
+  const [selectMovie, setSelectMovie] = useState<string>("");
+  const [sinopse, setSinopse] = useState<string>("");
+  const [rate, setRate] = useState<number>(0);
+  const [video, setVideo] = useState<string>("");
+  const [poster, setPoster] = useState<string>("");
 
   function handleSearch(data: string) {
     const filter = all.filter((element) =>
@@ -58,6 +82,22 @@ const DashboardProvider = ({ children }: IChildren) => {
         all,
         setAll,
         handleSearch,
+        modalEditProfile,
+        setModalEditProfile,
+        modalAddReview,
+        setModalAddReview,
+        setModalMovieInformations,
+        modalMovieInformations,
+        setSelectMovie,
+        selectMovie,
+        sinopse,
+        setSinopse,
+        rate,
+        setRate,
+        video,
+        setVideo,
+        poster,
+        setPoster
       }}
     >
       {children}
