@@ -2,11 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import api from "../../services/api";
 
 import {
-  DashboardHeaderStyled,
+  // DashboardHeaderStyled,
   DashboardMainStyled,
   DashboardStyled,
   DashboardSubHeaderStyled,
-  Details,
+  // Details,
   DetailsCategory,
 } from "./style";
 
@@ -17,11 +17,14 @@ import { FaRegPlayCircle } from "react-icons/fa";
 import Button from "../../components/Button";
 
 import { IData, useDashboardContext } from "../../context/dashboardContext";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Header from "../../components/Header";
 
 const Dashboard = () => {
   const [search, setSearch] = useState<string>("");
   const [title, setTitle] = useState<string>("Home");
+
+  const navigate = useNavigate();
 
   const {
     actualSection,
@@ -36,6 +39,12 @@ const Dashboard = () => {
   } = useDashboardContext();
 
   useEffect(() => {
+    const auth = localStorage.getItem("@user-auth");
+    console.log(auth);
+    if (auth !== "true") {
+      navigate("/login");
+    }
+
     async function teste() {
       async function loadMovies() {
         await api
@@ -68,7 +77,8 @@ const Dashboard = () => {
   return (
     <DashboardStyled>
       <header>
-        <DashboardHeaderStyled>
+        <Header isDashboard={true} />
+        {/* <DashboardHeaderStyled>
           <div id="header_logo">
             <h2>LOGO/NOME</h2>
           </div>
@@ -89,13 +99,20 @@ const Dashboard = () => {
                       <li>Minha Lista</li>
                       <li>Meus Reviews</li>
                     </ul>
-                    <Button>Logout</Button>
+                    <Button
+                      onClick={() => {
+                        localStorage.clear();
+                        navigate("/login");
+                      }}
+                    >
+                      Logout
+                    </Button>
                   </nav>
                 </div>
               </div>
             </Details>
           </div>
-        </DashboardHeaderStyled>
+        </DashboardHeaderStyled> */}
         <DashboardSubHeaderStyled>
           <div>
             <nav>
