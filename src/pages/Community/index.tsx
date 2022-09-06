@@ -12,12 +12,19 @@ import { HiUserCircle } from "react-icons/hi";
 import { BsFillChatLeftTextFill } from "react-icons/bs";
 import Header from "../../components/Header";
 
+import { motion } from "framer-motion";
+
 const Community = () => {
   const { opinions, movies, users, series, loading } =
     useContext(CommunityContext);
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.7 }}
+    >
       <CommunityHeader>
         <Header isDashboard={false} />
         {/* <h2>Nome/Logo</h2>
@@ -178,7 +185,7 @@ const Community = () => {
           )}
         </ul>
       </MainContent>
-    </>
+    </motion.div>
   );
 };
 

@@ -20,6 +20,8 @@ import { IData, useDashboardContext } from "../../context/dashboardContext";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 
+import { motion } from "framer-motion";
+
 const Dashboard = () => {
   const [search, setSearch] = useState<string>("");
   const [title, setTitle] = useState<string>("Home");
@@ -75,10 +77,16 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <DashboardStyled>
-      <header>
-        <Header isDashboard={true} />
-        {/* <DashboardHeaderStyled>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.7 }}
+    >
+      <DashboardStyled>
+        <header>
+          <Header isDashboard={true} />
+          {/* <DashboardHeaderStyled>
           <div id="header_logo">
             <h2>LOGO/NOME</h2>
           </div>
@@ -113,181 +121,185 @@ const Dashboard = () => {
             </Details>
           </div>
         </DashboardHeaderStyled> */}
-        <DashboardSubHeaderStyled>
-          <div>
-            <nav>
-              <ul>
-                <li>
-                  <button
-                    className="navigation_buttons"
-                    onClick={() => {
-                      setActualSection(movies);
-                      setTitle("Filmes");
-                    }}
-                  >
-                    Filmes
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="navigation_buttons"
-                    onClick={() => {
-                      setActualSection(series);
-                      setTitle("Séries");
-                    }}
-                  >
-                    Séries
-                  </button>
-                </li>
-                <li>
-                  <DetailsCategory>
-                    <div>
-                      <div className="category">
-                        <span>Categorias</span>
-                      </div>
-                      <div className="details_category">
-                        <nav>
-                          <ul>
-                            <li
-                              onClick={() => {
-                                setActualSection(() =>
-                                  all.filter(
-                                    (element) => element.genre === "acao"
-                                  )
-                                );
-                                setTitle("Ação");
-                              }}
-                            >
-                              Ação
-                            </li>
-                            <li
-                              onClick={() => {
-                                setActualSection(() =>
-                                  all.filter(
-                                    (element) => element.genre === "suspense"
-                                  )
-                                );
-                                setTitle("Suspense");
-                              }}
-                            >
-                              Suspense
-                            </li>
-
-                            <li
-                              onClick={() => {
-                                setActualSection(() =>
-                                  all.filter(
-                                    (element) => element.genre === "comedia"
-                                  )
-                                );
-                                setTitle("Comédia");
-                              }}
-                            >
-                              Comédia
-                            </li>
-                            <li
-                              onClick={() => {
-                                setActualSection(() =>
-                                  all.filter(
-                                    (element) => element.genre === "terror"
-                                  )
-                                );
-                                setTitle("Terror");
-                              }}
-                            >
-                              Terror
-                            </li>
-                            <li
-                              onClick={() => {
-                                setActualSection(() =>
-                                  all.filter(
-                                    (element) => element.genre === "romance"
-                                  )
-                                );
-                                setTitle("Romance");
-                              }}
-                            >
-                              Romance
-                            </li>
-                            <li
-                              onClick={() => {
-                                setActualSection(() =>
-                                  all.filter(
-                                    (element) => element.genre === "anime"
-                                  )
-                                );
-                                setTitle("Anime");
-                              }}
-                            >
-                              Anime
-                            </li>
-                            <li
-                              onClick={() => {
-                                setActualSection(() =>
-                                  all.filter(
-                                    (element) => element.genre === "reality"
-                                  )
-                                );
-                                setTitle("Reality");
-                              }}
-                            >
-                              Reality
-                            </li>
-                            <li
-                              onClick={() => {
-                                setActualSection(all);
-                                setTitle("Home");
-                              }}
-                            >
-                              Todos
-                            </li>
-                          </ul>
-                        </nav>
-                      </div>
-                    </div>
-                  </DetailsCategory>
-                </li>
-              </ul>
-            </nav>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleSearch(search);
-              }}
-            >
-              <input type="text" onChange={(e) => setSearch(e.target.value)} />
-              <button type="submit">
-                <AiOutlineSearch />
-              </button>
-            </form>
-          </div>
-        </DashboardSubHeaderStyled>
-      </header>
-
-      <DashboardMainStyled>
-        <h2>{title}</h2>
-
-        <section>
-          <ul>
-            {actualSection.map((movie, index) => {
-              return (
-                <li className="card" key={index}>
-                  <img src={movie.poster} alt={movie.title} />
-                  <div className="button_box">
-                    <button>
-                      <FaRegPlayCircle />
+          <DashboardSubHeaderStyled>
+            <div>
+              <nav>
+                <ul>
+                  <li>
+                    <button
+                      className="navigation_buttons"
+                      onClick={() => {
+                        setActualSection(movies);
+                        setTitle("Filmes");
+                      }}
+                    >
+                      Filmes
                     </button>
-                  </div>
-                  <div className="title_box">
-                    <h5>{movie.title}</h5>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-      </DashboardMainStyled>
-    </DashboardStyled>
+                  </li>
+                  <li>
+                    <button
+                      className="navigation_buttons"
+                      onClick={() => {
+                        setActualSection(series);
+                        setTitle("Séries");
+                      }}
+                    >
+                      Séries
+                    </button>
+                  </li>
+                  <li>
+                    <DetailsCategory>
+                      <div>
+                        <div className="category">
+                          <span>Categorias</span>
+                        </div>
+                        <div className="details_category">
+                          <nav>
+                            <ul>
+                              <li
+                                onClick={() => {
+                                  setActualSection(() =>
+                                    all.filter(
+                                      (element) => element.genre === "acao"
+                                    )
+                                  );
+                                  setTitle("Ação");
+                                }}
+                              >
+                                Ação
+                              </li>
+                              <li
+                                onClick={() => {
+                                  setActualSection(() =>
+                                    all.filter(
+                                      (element) => element.genre === "suspense"
+                                    )
+                                  );
+                                  setTitle("Suspense");
+                                }}
+                              >
+                                Suspense
+                              </li>
+
+                              <li
+                                onClick={() => {
+                                  setActualSection(() =>
+                                    all.filter(
+                                      (element) => element.genre === "comedia"
+                                    )
+                                  );
+                                  setTitle("Comédia");
+                                }}
+                              >
+                                Comédia
+                              </li>
+                              <li
+                                onClick={() => {
+                                  setActualSection(() =>
+                                    all.filter(
+                                      (element) => element.genre === "terror"
+                                    )
+                                  );
+                                  setTitle("Terror");
+                                }}
+                              >
+                                Terror
+                              </li>
+                              <li
+                                onClick={() => {
+                                  setActualSection(() =>
+                                    all.filter(
+                                      (element) => element.genre === "romance"
+                                    )
+                                  );
+                                  setTitle("Romance");
+                                }}
+                              >
+                                Romance
+                              </li>
+                              <li
+                                onClick={() => {
+                                  setActualSection(() =>
+                                    all.filter(
+                                      (element) => element.genre === "anime"
+                                    )
+                                  );
+                                  setTitle("Anime");
+                                }}
+                              >
+                                Anime
+                              </li>
+                              <li
+                                onClick={() => {
+                                  setActualSection(() =>
+                                    all.filter(
+                                      (element) => element.genre === "reality"
+                                    )
+                                  );
+                                  setTitle("Reality");
+                                }}
+                              >
+                                Reality
+                              </li>
+                              <li
+                                onClick={() => {
+                                  setActualSection(all);
+                                  setTitle("Home");
+                                }}
+                              >
+                                Todos
+                              </li>
+                            </ul>
+                          </nav>
+                        </div>
+                      </div>
+                    </DetailsCategory>
+                  </li>
+                </ul>
+              </nav>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  handleSearch(search);
+                }}
+              >
+                <input
+                  type="text"
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+                <button type="submit">
+                  <AiOutlineSearch />
+                </button>
+              </form>
+            </div>
+          </DashboardSubHeaderStyled>
+        </header>
+
+        <DashboardMainStyled>
+          <h2>{title}</h2>
+
+          <section>
+            <ul>
+              {actualSection.map((movie, index) => {
+                return (
+                  <li className="card" key={index}>
+                    <img src={movie.poster} alt={movie.title} />
+                    <div className="button_box">
+                      <button>
+                        <FaRegPlayCircle />
+                      </button>
+                    </div>
+                    <div className="title_box">
+                      <h5>{movie.title}</h5>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </section>
+        </DashboardMainStyled>
+      </DashboardStyled>
+    </motion.div>
   );
 };
 
