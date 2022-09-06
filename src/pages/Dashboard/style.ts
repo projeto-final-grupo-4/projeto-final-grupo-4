@@ -47,8 +47,6 @@ export const DashboardHeaderStyled = styled.div`
 `;
 
 export const Details = styled.div`
-  details > summary::-webkit-details-marker {
-  }
   .details {
     height: 200px;
     width: 175px;
@@ -64,10 +62,40 @@ export const Details = styled.div`
 
     position: absolute;
     top: 60px;
-    right: 10px;
+    right: -20px;
 
     z-index: 999;
+
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.2s linear;
+    /* display: none; */
   }
+  .details::before {
+    content: "";
+    border-style: solid;
+    border-width: 20px 17px 0 17px;
+    border-color: var(--yellow) transparent;
+    transform: rotate(180deg);
+    position: absolute;
+    top: -10px;
+    right: 18px;
+  }
+  .user_icon {
+    /* background-color: red; */
+  }
+  .user_icon:hover + .details {
+    visibility: visible;
+    z-index: 999;
+
+    opacity: 1;
+  }
+  .details:hover {
+    visibility: visible;
+    z-index: 999;
+    opacity: 1;
+  }
+
   nav {
     width: 90%;
     height: 90%;
@@ -85,6 +113,107 @@ export const Details = styled.div`
 
     font-weight: 500;
     font-size: 1rem;
+  }
+  nav ul li {
+    cursor: pointer;
+  }
+`;
+export const DetailsCategory = styled.div`
+  position: relative;
+
+  .details_category {
+    height: 220px;
+    width: 175px;
+
+    background-color: var(--grey-2);
+    color: var(--grey-4);
+
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 45px;
+    z-index: 999;
+
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.2s linear;
+    /* display: none; */
+  }
+  .details_category::before {
+    content: "";
+    border-style: solid;
+    border-width: 20px 17px 0 17px;
+    border-color: var(--grey-2) transparent;
+    transform: rotate(180deg);
+    position: absolute;
+    top: -10px;
+    right: 18px;
+  }
+  .category {
+    background-color: transparent;
+    width: 100px;
+    height: 40px;
+  }
+  .category:hover + .details_category {
+    visibility: visible;
+    z-index: 999;
+
+    opacity: 1;
+  }
+  .details_category:hover {
+    visibility: visible;
+    z-index: 999;
+    opacity: 1;
+  }
+
+  nav {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  nav ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+
+    font-weight: 500;
+    font-size: 1rem;
+  }
+  nav ul li {
+    color: var(--grey-0);
+    cursor: pointer;
+  }
+  nav ul li:hover {
+    color: var(--yellow);
+    transition: 0.2s;
+  }
+
+  @media (min-width: 425px) {
+    .details_category {
+      height: 250px;
+      top: 45px;
+    }
+    .category {
+    }
+  }
+  @media (min-width: 768px) {
+    .details_category {
+      height: 250px;
+
+      top: 35px;
+    }
+    .category {
+      width: 130px;
+    }
   }
 `;
 export const DashboardSubHeaderStyled = styled.div`
@@ -158,6 +287,16 @@ export const DashboardSubHeaderStyled = styled.div`
     /* max-width: 20%; */
     /* display: none; */
   }
+  div form input:focus {
+    outline: none;
+    transform: scale(1.02);
+    transition: 0.4s;
+  }
+  div form input:focus + button {
+    outline: none;
+    transform: scale(1.02);
+    transition: 0.4s;
+  }
   div form button {
     height: 30px;
     border: none;
@@ -174,7 +313,7 @@ export const DashboardSubHeaderStyled = styled.div`
     div form input {
       width: 130px;
     }
-    div nav > ul {
+    div nav > ul button {
       font-size: 1rem;
     }
   }
@@ -271,6 +410,7 @@ export const DashboardMainStyled = styled.main`
 
     opacity: 0;
   }
+
   .card:hover button {
     opacity: 1;
     transition: 0.8s;
