@@ -22,6 +22,7 @@ export const LoginForm = styled.form`
         margin-top: 40px;
         border-radius: 4px;
         border-style: none;
+        padding-left: 10px;
     }
     input::placeholder{
         font-weight: 600;
@@ -34,7 +35,7 @@ export const LoginForm = styled.form`
         font-weight: 600;
         font-size: 16px;
         color: #383838;
-        margin-bottom: 5px;
+        margin: 5px 0px;
     }
 
    

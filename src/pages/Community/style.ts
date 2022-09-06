@@ -135,6 +135,13 @@ export const MainContent = styled.main`
     border-radius: 10px;
   }
 
+  ul li .mediaInfo .sinopseRate {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
   ul li .mediaInfo .sinopse {
     display: none;
   }

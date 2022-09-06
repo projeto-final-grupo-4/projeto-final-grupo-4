@@ -40,15 +40,6 @@ const Community = () => {
     <>
       <CommunityHeader>
         <Header isDashboard={false} />
-        {/* <h2>Nome/Logo</h2>
-        <span>
-          <HeaderButton>
-            <AiOutlineHome />
-          </HeaderButton>
-          <HeaderButton>
-            <HiUserCircle />
-          </HeaderButton>
-        </span> */}
       </CommunityHeader>
       <HeaderNavigation>
         <div className="header_navigation">

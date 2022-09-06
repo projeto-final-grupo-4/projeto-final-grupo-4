@@ -23,6 +23,7 @@ export const RegisterForm = styled.form`
         margin-top: 20px;
         border-radius: 4px;
         border-style: none;
+        padding-left: 10px;
     }
     input::placeholder{
         font-weight: 600;
