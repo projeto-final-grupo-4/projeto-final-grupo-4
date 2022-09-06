@@ -305,8 +305,11 @@ export const DetailsCategory = styled.div`
   @media (min-width: 768px) {
     .details_category {
       height: 300px;
-      top: 22px;
+      top: 20px;
     }
 
+    .category {
+      margin-top: 2px;
+    }
   }
 `;
