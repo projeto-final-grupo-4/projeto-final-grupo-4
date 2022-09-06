@@ -1,8 +1,11 @@
 import FormRegister from "../../components/formRegister"
+import { DivBackground } from "../Login/styles"
 
 const Register = () => {
     return(
-        <FormRegister />
+        <DivBackground>
+            <FormRegister />
+        </DivBackground>
     )
 }
 

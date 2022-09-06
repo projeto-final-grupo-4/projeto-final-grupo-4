@@ -1,8 +1,11 @@
 import FormLogin from "../../components/formLogin"
+import { DivBackground } from "./styles"
 
 const Login = () => {
     return(
-        <FormLogin />
+        <DivBackground>
+            <FormLogin />
+        </DivBackground>
     )
 }
 

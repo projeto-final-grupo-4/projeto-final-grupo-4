@@ -7,7 +7,6 @@ export const LoginForm = styled.form`
     justify-content: center;
     width: 395px;
     height: 502px;
-    margin-top: 450px;
     background: #F0F0F0;
     border-radius: 15px;
 
@@ -38,9 +37,6 @@ export const LoginForm = styled.form`
         margin-bottom: 5px;
     }
 
-    @media (min-width: 769px){
-        margin-top: 150px;
-}
    
 `
 
