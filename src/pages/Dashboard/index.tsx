@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 import api from "../../services/api";
 
 import {
@@ -11,17 +11,17 @@ import {
 } from "./style";
 
 import { AiOutlineSearch } from "react-icons/ai";
-import { HiUserGroup, HiUserCircle } from "react-icons/hi";
-import { FaRegPlayCircle } from "react-icons/fa";
-import { BsFillGearFill, BsCardList, BsChatLeft } from 'react-icons/bs'
 
-import Button from "../../components/Button";
+import { FaRegPlayCircle } from "react-icons/fa";
+
+
+
 import ModalEditProfile from "../../components/Modals/modalEditProfile";
 import ModalMovieInformations from "../../components/Modals/modalMovieInformations";
 import ModalAddReview from "../../components/Modals/modalAddReview";
 
 import { IData, useDashboardContext } from "../../context/dashboardContext";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 
 const Dashboard = () => {
@@ -40,7 +40,6 @@ const Dashboard = () => {
     all,
     setAll,
     handleSearch,
-    setModalEditProfile,
     setModalMovieInformations,
     setSelectMovie,
     setSinopse,
@@ -51,7 +50,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     const auth = localStorage.getItem("@user-auth");
-    console.log(auth);
     if (auth !== "true") {
       navigate("/login");
     }
@@ -90,41 +88,6 @@ const Dashboard = () => {
       <ModalMovieInformations />
       <header>
         <Header isDashboard={true} />
-        {/* <DashboardHeaderStyled>
-          <div id="header_logo">
-            <h2>LOGO/NOME</h2>
-          </div>
-
-          <div id="header_user">
-            <Link to={"/community"}>
-              <HiUserGroup className="community_icon" />
-            </Link>
-            <Details>
-              <div>
-                <div className="user_icon">
-                  <HiUserCircle />
-                </div>
-                <div className="details">
-                  <nav>
-                    <ul>
-                      <li><BsFillGearFill /><button onClick={() => setModalEditProfile(true)} >Configurações</button></li>
-                      <li><BsCardList /><button>Minha Lista</button></li>
-                      <li><BsChatLeft /><button>Meus Reviews</button></li>
-                    </ul>
-                    <Button
-                      onClick={() => {
-                        localStorage.clear();
-                        navigate("/login");
-                      }}
-                    >
-                      Logout
-                    </Button>
-                  </nav>
-                </div>
-              </div>
-            </Details>
-          </div>
-        </DashboardHeaderStyled> */}
         <DashboardSubHeaderStyled>
           <div>
             <nav>
@@ -312,95 +275,6 @@ const Dashboard = () => {
   );
 };
 
-//  return isLogged? (
-//   <DashboardStyled>
-//     <header>
-//       <DashboardHeaderStyled>
-//         <div id="header_logo">
-//           <h2>LOGO/NOME</h2>
-//         </div>
 
-//         <div id="header_user">
-//           <Link to={"/community"}>
-//             <HiUserGroup className="community_icon" />
-//           </Link>
-//           <Details>
-//             <details>
-//               <summary>
-//                 <HiUserCircle className="user_icon" />
-//               </summary>
-//               <div className="details">
-//                 <nav>
-//                   <ul>
-//                     <li>Configurações</li>
-//                     <li>Minha Lista</li>
-//                     <li>Meus Reviews</li>
-//                   </ul>
-//                   <Button>Logout</Button>
-//                 </nav>
-//               </div>
-//             </details>
-//           </Details>
-//         </div>
-//       </DashboardHeaderStyled>
-//       <DashboardSubHeaderStyled>
-//         <div>
-//           <nav>
-//             <ul>
-//               <li
-//                 onClick={() => {
-//                   handleFilterMovies();
-//                 }}
-//               >
-//                 <button className="navigation_buttons">Filmes</button>
-//               </li>
-//               <li
-//                 onClick={() => {
-//                   handleFilterSeries();
-//                 }}
-//               >
-//                 <button className="navigation_buttons">Séries</button>
-//               </li>
-//               <li onClick={() => console.log("oi")}>
-//                 <button className="navigation_buttons">Categorias</button>
-//               </li>
-//             </ul>
-//           </nav>
-//           <form action="">
-//             <input type="text" />
-//             <button>
-//               <AiOutlineSearch />
-//             </button>
-//           </form>
-//         </div>
-//       </DashboardSubHeaderStyled>
-//     </header>
-
-//     <DashboardMainStyled>
-//       <h2>{actualSection[0]?.type === "movie" ? "Filmes" : "Séries"}</h2>
-
-//       <section>
-//         <ul>
-//           {actualSection.map((movie) => {
-//             return (
-//               <li className="card" key={movie.id}>
-//                 <img src={movie.poster} alt={movie.title} />
-//                 <div className="button_box">
-//                   <button>
-//                     <FaRegPlayCircle />
-//                   </button>
-//                 </div>
-//                 <div className="title_box">
-//                   <h5>{movie.title}</h5>
-//                 </div>
-//               </li>
-//             );
-//           })}
-//         </ul>
-//       </section>
-//     </DashboardMainStyled>
-//   </DashboardStyled>)
-//   : (<Navigate to={'/login'} replace={true}></Navigate>)
-// };
 
 export default Dashboard;

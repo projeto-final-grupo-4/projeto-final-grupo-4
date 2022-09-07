@@ -1,15 +1,14 @@
 import {
   CommunityHeader,
   DetailsCategory,
-  HeaderButton,
   HeaderNavigation,
   MainContent,
 } from "./style";
 import { useContext } from "react";
 import { CommunityContext } from "../../context/CommunityContext";
 
-import { AiOutlineHome, AiOutlineSearch } from "react-icons/ai";
-import { HiUserCircle } from "react-icons/hi";
+import {AiOutlineSearch } from "react-icons/ai";
+
 import { BsFillChatLeftTextFill } from "react-icons/bs";
 import Header from "../../components/Header";
 
@@ -141,7 +140,7 @@ const Community = () => {
                       </span>
                       <p className="content">{opinion.content}</p>
                       <span className="rateButton">
-                        <p>{opinion.rate}</p>
+                        <p>{`${opinion.rate}/5`}</p>
                         <button>
                           <BsFillChatLeftTextFill />
                         </button>
@@ -196,7 +195,7 @@ const Community = () => {
                       </span>
                       <p className="content">{opinion.content}</p>
                       <span className="rateButton">
-                        <p>{opinion.rate}</p>
+                        <p>{`${opinion.rate}/5`}</p>
                         <button>
                           <BsFillChatLeftTextFill />
                         </button>

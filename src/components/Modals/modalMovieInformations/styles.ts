@@ -8,10 +8,11 @@ export const DivModalMovieInformations = styled.div`
     height: 100vh;
     font-family: 'Montserrat', sans-serif;
     position: fixed;
-    z-index: 1;
+    z-index: 999;
     flex-direction: column;
     overflow-y: hidden;
     border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.7);;
 `
 
 export const DivScreenMovie = styled.div`
@@ -20,14 +21,16 @@ background-color: #000000;
 height: 30vh;
 
 @media screen and (min-width: 769px) {
-    margin-top: 20vh;
+  /* '  margin-top: 20vh;' */
     width: 70%;
-    height: 50vh;
+    /* height: 50vh; */
+    height: fit-content;
 }
 
 @media screen and (min-width: 1000px){
     width: 70%;
-    height: 60vh;
+    /* height: 60vh; */
+    height: fit-content;
 }
 `
 
@@ -48,10 +51,10 @@ display: flex;
 justify-content: center;
 align-items: center;
 width: 100%;
-height: 20vh;
+/* height: 20vh; */
 
 @media screen and (min-width: 769px) {
-    height: 40vh;
+    /* height: 40vh; */
 }
 
 @media screen and (min-width: 769px) {
@@ -69,7 +72,7 @@ background-color: #383838;
 width: 80%;
 height: 30vh;
 padding: 5px;
-overflow: scroll;
+overflow: auto;
 
 @media screen and (min-width: 769px) {
     width: 69%;
@@ -78,7 +81,9 @@ overflow: scroll;
 
 @media screen and (min-width: 1000px){
     width: 69%;
-    height: 15vh;
+    padding-top: 20px;
+    height: fit-content;
+    /* height: 15vh; */
 }
 `
 
