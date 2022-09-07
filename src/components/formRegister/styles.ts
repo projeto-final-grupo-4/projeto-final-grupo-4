@@ -10,7 +10,7 @@ export const RegisterForm = styled.form`
     height: 602px;  
     background: #F0F0F0;
     border-radius: 15px;
-
+    position: relative;
 
     h1{
         font-weight: 600;
@@ -23,6 +23,7 @@ export const RegisterForm = styled.form`
         margin-top: 20px;
         border-radius: 4px;
         border-style: none;
+        padding-left: 10px;
     }
     input::placeholder{
         font-weight: 600;
@@ -42,8 +43,16 @@ export const RegisterForm = styled.form`
         margin-top: 10px;
     }
 
-
-
+    .eyeButton {
+    border: none;
+    background-color: transparent;
+    color: #000;
+    position: absolute;
+    top: 358px;
+    left: 295px;
+    font-size: 17px;
+    cursor: pointer;
+    }
 `
 
 export const ButtonRegister = styled.button`
