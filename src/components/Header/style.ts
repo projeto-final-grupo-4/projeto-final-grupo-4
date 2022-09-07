@@ -15,6 +15,18 @@ export const DashboardHeaderStyled = styled.div`
   align-items: center;
 
   position: relative;
+  #header_logo {
+    display: flex;
+    align-items: center;
+
+    width: 200px;
+    height: 200px;
+  }
+  #header_logo img {
+    width: 100px;
+    height: 50px;
+  }
+
   #header_user {
     width: 100px;
     display: flex;

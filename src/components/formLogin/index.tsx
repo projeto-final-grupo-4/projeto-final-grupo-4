@@ -4,7 +4,6 @@ import * as yup from "yup";
 import { ButtonEnter, ButtonRegister, LoginForm } from "./styles";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
-
 import { toast } from "react-toastify";
 
 export interface ILogin {
@@ -55,10 +54,10 @@ const FormLogin = () => {
     );
     if (obj !== undefined) {
       localStorage.setItem("@USERID", `${obj.id}`);
-      toast.success("Bem Vindo!", {
+      toast.success("Bem vindo!", {
         position: "top-right",
         autoClose: 5000,
-        hideProgressBar: true,
+        hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
