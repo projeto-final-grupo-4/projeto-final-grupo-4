@@ -360,7 +360,8 @@ export const DashboardMainStyled = styled.main`
   align-items: center;
 
   h2 {
-    margin-top: 5%;
+    margin: 5%;
+    font-size: 1.5rem;
     color: var(--grey-0);
   }
   section {

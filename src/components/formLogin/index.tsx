@@ -4,7 +4,11 @@ import * as yup from "yup";
 import { ButtonEnter, ButtonRegister, LoginForm } from "./styles";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
+
 import { toast } from "react-toastify";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { useState } from "react";
+
 
 export interface ILogin {
   name: string;
@@ -15,6 +19,7 @@ export interface ILogin {
 }
 
 const FormLogin = () => {
+
   const navigate = useNavigate();
 
   const schema = yup.object({
@@ -76,8 +81,19 @@ const FormLogin = () => {
         progress: undefined,
         theme: "colored",
       });
-      console.log("deu ruim");
     }
+  };
+
+
+
+   const showPassword = (e: any) => {
+    e.preventDefault();
+    setTypePassword("text");
+  };
+
+  const hidePassword = (e: any) => {
+    e.preventDefault();
+    setTypePassword("password");
   };
 
   return (
@@ -85,7 +101,20 @@ const FormLogin = () => {
       <h1>Login</h1>
       <input type="email" placeholder="Email" {...register("email")} />
       <span>{errors.email?.message}</span>
-      <input type="password" placeholder="Senha" {...register("password")} />
+      <input
+        type={typePassword}
+        placeholder="Senha"
+        {...register("password")}
+      />
+      {typePassword === "password" ? (
+        <button onClick={showPassword} className="eyeButton">
+          <AiFillEye />
+        </button>
+      ) : (
+        <button onClick={hidePassword} className="eyeButton">
+          <AiFillEyeInvisible />
+        </button>
+      )}
       <span>{errors.password?.message}</span>
       <h3>Não possui uma conta?</h3>
       <ButtonRegister onClick={() => navigate("/register")}>
@@ -95,5 +124,6 @@ const FormLogin = () => {
     </LoginForm>
   );
 };
+
 
 export default FormLogin;

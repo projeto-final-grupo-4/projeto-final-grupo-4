@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 import api from "../../services/api";
 
 import {
@@ -11,17 +11,19 @@ import {
 } from "./style";
 
 import { AiOutlineSearch } from "react-icons/ai";
-import { HiUserGroup, HiUserCircle } from "react-icons/hi";
+
 import { FaRegPlayCircle } from "react-icons/fa";
 import { BsFillGearFill, BsCardList, BsChatLeft } from "react-icons/bs";
 
-import Button from "../../components/Button";
+
+
+
 import ModalEditProfile from "../../components/Modals/modalEditProfile";
 import ModalMovieInformations from "../../components/Modals/modalMovieInformations";
 import ModalAddReview from "../../components/Modals/modalAddReview";
 
 import { IData, useDashboardContext } from "../../context/dashboardContext";
-import { Link, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 
 import { motion } from "framer-motion";
@@ -43,7 +45,6 @@ const Dashboard = () => {
     all,
     setAll,
     handleSearch,
-    setModalEditProfile,
     setModalMovieInformations,
     setSelectMovie,
     setSinopse,
@@ -54,7 +55,6 @@ const Dashboard = () => {
 
   useEffect(() => {
     const auth = localStorage.getItem("@user-auth");
-    console.log(auth);
     if (auth !== "true") {
       navigate("/login");
     }
@@ -89,109 +89,77 @@ const Dashboard = () => {
   }, []);
 
   return (
+
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7 }}
     >
-      <DashboardStyled>
-        <header>
-          <Header isDashboard={true} />
-          {/* <DashboardHeaderStyled>
-          <div id="header_logo">
-            <h2>LOGO/NOME</h2>
-          </div>
+    <DashboardStyled>
+      <ModalMovieInformations />
+      <header>
+        <Header isDashboard={true} />
+        <DashboardSubHeaderStyled>
+          <div>
+            <nav>
+              <ul>
+                <li>
+                  <button
+                    className="navigation_buttons"
+                    onClick={() => {
+                      setActualSection(movies);
+                      setTitle("Filmes");
+                    }}
+                  >
+                    Filmes
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="navigation_buttons"
+                    onClick={() => {
+                      setActualSection(series);
+                      setTitle("Séries");
+                    }}
+                  >
+                    Séries
+                  </button>
+                </li>
+                <li>
+                  <DetailsCategory>
+                    <div>
+                      <div className="category">
+                        <span>Categorias</span>
+                      </div>
+                      <div className="details_category">
+                        <nav>
+                          <ul>
+                            <li
+                              onClick={() => {
+                                setActualSection(() =>
+                                  all.filter(
+                                    (element) => element.genre === "acao"
+                                  )
+                                );
+                                setTitle("Ação");
+                              }}
+                            >
+                              Ação
+                            </li>
+                            <li
+                              onClick={() => {
+                                setActualSection(() =>
+                                  all.filter(
+                                    (element) => element.genre === "suspense"
+                                  )
+                                );
+                                setTitle("Suspense");
+                              }}
+                            >
+                              Suspense
+                            </li>
 
-          <div id="header_user">
-            <Link to={"/community"}>
-              <HiUserGroup className="community_icon" />
-            </Link>
-            <Details>
-              <div>
-                <div className="user_icon">
-                  <HiUserCircle />
-                </div>
-                <div className="details">
-                  <nav>
-                    <ul>
-                      <li><BsFillGearFill /><button onClick={() => setModalEditProfile(true)} >Configurações</button></li>
-                      <li><BsCardList /><button>Minha Lista</button></li>
-                      <li><BsChatLeft /><button>Meus Reviews</button></li>
-                    </ul>
-                    <Button
-                      onClick={() => {
-                        localStorage.clear();
-                        navigate("/login");
-                      }}
-                    >
-                      Logout
-                    </Button>
-                  </nav>
-                </div>
-              </div>
-            </Details>
-          </div>
-        </DashboardHeaderStyled> */}
-          <DashboardSubHeaderStyled>
-            <div>
-              <nav>
-                <ul>
-                  <li>
-                    <button
-                      className="navigation_buttons"
-                      onClick={() => {
-                        setActualSection(movies);
-                        setTitle("Filmes");
-                      }}
-                    >
-                      Filmes
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      className="navigation_buttons"
-                      onClick={() => {
-                        setActualSection(series);
-                        setTitle("Séries");
-                      }}
-                    >
-                      Séries
-                    </button>
-                  </li>
-                  <li>
-                    <DetailsCategory>
-                      <div>
-                        <div className="category">
-                          <span>Categorias</span>
-                        </div>
-                        <div className="details_category">
-                          <nav>
-                            <ul>
-                              <li
-                                onClick={() => {
-                                  setActualSection(() =>
-                                    all.filter(
-                                      (element) => element.genre === "acao"
-                                    )
-                                  );
-                                  setTitle("Ação");
-                                }}
-                              >
-                                Ação
-                              </li>
-                              <li
-                                onClick={() => {
-                                  setActualSection(() =>
-                                    all.filter(
-                                      (element) => element.genre === "suspense"
-                                    )
-                                  );
-                                  setTitle("Suspense");
-                                }}
-                              >
-                                Suspense
-                              </li>
 
                               <li
                                 onClick={() => {
