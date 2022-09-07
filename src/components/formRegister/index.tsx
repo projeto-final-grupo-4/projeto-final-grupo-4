@@ -5,8 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { RegisterForm, ButtonRegister } from "./styles";
 import api from "../../services/api";
 import { FieldValue } from "react-hook-form";
+import { toast } from "react-toastify";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
+
 
 export interface IUser {
   name: string;
@@ -32,6 +34,7 @@ export interface IUserContext {
 }
 
 const FormRegister = () => {
+
   const [typePassword, setTypePassword] = useState<string>("password");
 
   const navigate = useNavigate();
@@ -67,14 +70,40 @@ const FormRegister = () => {
   });
 
   const onSubmit = (data: FieldValue<IUserContext>) => {
+
     api
       .post("users", data)
       .then((response) => {
         console.log(response);
         window.localStorage.setItem("token", response.data.accessToken);
+        
+        
+
+        toast.success("Usuário criado com sucesso!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
         navigate("/login");
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        toast.error("Falha ao registrar, tente novamente mais tarde!", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+        console.error(error);
+      });
   };
 
   const showPassword = (e: any) => {
@@ -85,6 +114,7 @@ const FormRegister = () => {
   const hidePassword = (e: any) => {
     e.preventDefault();
     setTypePassword("password");
+
   };
 
   return (
@@ -110,6 +140,7 @@ const FormRegister = () => {
         <span>{errors.password?.message}</span>
         <input
           type={typePassword}
+
           placeholder="Confirmar senha"
           {...register("confirmPassword")}
         />
@@ -117,6 +148,7 @@ const FormRegister = () => {
         <ButtonRegister onClick={()=>{
           setValue("watch_later",[])
         }} type="submit">Cadastrar</ButtonRegister>
+
       </RegisterForm>
     </>
   );

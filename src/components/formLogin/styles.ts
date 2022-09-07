@@ -1,6 +1,7 @@
-import styled  from 'styled-components'
+import styled from "styled-components";
 
 export const LoginForm = styled.form`
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,23 +51,25 @@ export const LoginForm = styled.form`
     }
 `
 
+
 export const ButtonEnter = styled.button`
-    background: #383838;
-    font-weight: 600;
-    font-size: 16px;
-    color: #F0F0F0;
-    border-radius: 10px;
-    width: 116px;
-    height: 34px;
-    cursor: pointer;
-`
+  background: #383838;
+  font-weight: 600;
+  font-size: 16px;
+  color: #f0f0f0;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  width: 116px;
+  height: 34px;
+  cursor: pointer;
+`;
 
 export const ButtonRegister = styled.button`
-    background: #F0F0F0;
-    border-style:none;
-    color:#F2CE0F;
-    cursor: pointer;
-    margin-bottom: 30px;
-    font-weight: bold;
-    font-size: 14px
-`
+  background: #f0f0f0;
+  border-style: none;
+  color: #f2ce0f;
+  cursor: pointer;
+  margin-bottom: 30px;
+  font-weight: bold;
+  font-size: 14px;
+`;

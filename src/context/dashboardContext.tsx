@@ -43,6 +43,8 @@ interface IDashboardContext {
   setVideo: (video: string) => void;
   poster: string;
   setPoster: (poster: string) => void;
+  title: string;
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const DashboardContext = createContext<IDashboardContext>(
@@ -50,13 +52,15 @@ const DashboardContext = createContext<IDashboardContext>(
 );
 
 const DashboardProvider = ({ children }: IChildren) => {
+  const [title, setTitle] = useState<string>("Home");
   const [movies, setMovies] = useState<IData[]>([]);
   const [series, setSeries] = useState<IData[]>([]);
   const [all, setAll] = useState<IData[]>([]);
   const [actualSection, setActualSection] = useState<IData[]>([]);
   const [modalEditProfile, setModalEditProfile] = useState<boolean>(false);
   const [modalAddReview, setModalAddReview] = useState<boolean>(false);
-  const [modalMovieInformations, setModalMovieInformations] = useState<boolean>(false);
+  const [modalMovieInformations, setModalMovieInformations] =
+    useState<boolean>(false);
   const [selectMovie, setSelectMovie] = useState<string>("");
   const [sinopse, setSinopse] = useState<string>("");
   const [rate, setRate] = useState<number>(0);
@@ -64,15 +68,18 @@ const DashboardProvider = ({ children }: IChildren) => {
   const [poster, setPoster] = useState<string>("");
 
   function handleSearch(data: string) {
-    const filter = all.filter((element) =>
-      element.title.toLowerCase().includes(data.toLowerCase().trim())
-    );
+    const filter = all.filter((element) => {
+      setTitle(() => `Você buscou por "${data}"`);
+      return element.title.toLowerCase().includes(data.toLowerCase().trim());
+    });
     setActualSection(filter);
   }
 
   return (
     <DashboardContext.Provider
       value={{
+        title,
+        setTitle,
         setActualSection,
         movies,
         setMovies,
@@ -97,7 +104,7 @@ const DashboardProvider = ({ children }: IChildren) => {
         video,
         setVideo,
         poster,
-        setPoster
+        setPoster,
       }}
     >
       {children}

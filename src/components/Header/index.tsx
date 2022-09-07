@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { DashboardHeaderStyled, Details } from "./style";
 import { HiUserGroup, HiUserCircle } from "react-icons/hi";
 import { AiOutlineHome } from "react-icons/ai";
+import Logo from "../../assets/img/logo-projeto.png";
 
 import Button from "../Button";
 
@@ -17,7 +18,7 @@ const Header = ({ isDashboard }: IHeaderProps) => {
   return (
     <DashboardHeaderStyled>
       <div id="header_logo">
-        <h2>LOGO/NOME</h2>
+        <img src={Logo} alt={"logo"}></img>
       </div>
 
       <div id="header_user">

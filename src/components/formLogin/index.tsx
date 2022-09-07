@@ -4,8 +4,11 @@ import * as yup from "yup";
 import { ButtonEnter, ButtonRegister, LoginForm } from "./styles";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
+
+import { toast } from "react-toastify";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
+
 
 export interface ILogin {
   name: string;
@@ -16,7 +19,6 @@ export interface ILogin {
 }
 
 const FormLogin = () => {
-  const [typePassword, setTypePassword] = useState<string>("password");
 
   const navigate = useNavigate();
 
@@ -39,6 +41,7 @@ const FormLogin = () => {
     await api
       .get("users")
       .then((response) => {
+        console.log(response.data);
         localStorage.setItem("@user-auth", "true");
         data.push(...response.data);
       })
@@ -49,19 +52,41 @@ const FormLogin = () => {
 
   const authLogin = async (data: any) => {
     const users: any[] | null[] = await signIn();
+    console.log(users.length);
     const obj = users.find(
-      (item: { email: string; confirmPassword: string }) =>
-        item.email === data.email && item.confirmPassword === data.password
+      (item: { email: string; password: string }) =>
+        item.email === data.email && item.password === data.password
     );
     if (obj !== undefined) {
       localStorage.setItem("@USERID", `${obj.id}`);
+      toast.success("Bem vindo!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
       navigate("/dashboard");
     } else {
-      console.log("deu ruim");
+      toast.error("Usuário ou senha incorretos!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
     }
   };
 
-  const showPassword = (e: any) => {
+
+
+   const showPassword = (e: any) => {
     e.preventDefault();
     setTypePassword("text");
   };
@@ -99,5 +124,6 @@ const FormLogin = () => {
     </LoginForm>
   );
 };
+
 
 export default FormLogin;

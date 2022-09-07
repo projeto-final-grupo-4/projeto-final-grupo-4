@@ -12,6 +12,8 @@ import {AiOutlineSearch } from "react-icons/ai";
 import { BsFillChatLeftTextFill } from "react-icons/bs";
 import Header from "../../components/Header";
 
+import { motion } from "framer-motion";
+
 const Community = () => {
   const {
     opinions,
@@ -36,7 +38,12 @@ const Community = () => {
   };
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.7 }}
+    >
       <CommunityHeader>
         <Header isDashboard={false} />
       </CommunityHeader>
@@ -208,7 +215,7 @@ const Community = () => {
           )}
         </ul>
       </MainContent>
-    </>
+    </motion.div>
   );
 };
 
