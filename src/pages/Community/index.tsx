@@ -5,14 +5,19 @@ import {
   MainContent,
 } from "./style";
 import { useContext } from "react";
+
 import { CommunityContext } from "../../context/CommunityContext";
 
-import {AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineSearch } from "react-icons/ai";
 
 import { BsFillChatLeftTextFill } from "react-icons/bs";
 import Header from "../../components/Header";
 
 import { motion } from "framer-motion";
+
+import ModalEditProfile from "../../components/Modals/modalEditProfile";
+import ModalMovieInformations from "../../components/Modals/modalMovieInformations";
+import ModalAddReview from "../../components/Modals/modalAddReview";
 
 const Community = () => {
   const {
@@ -44,6 +49,9 @@ const Community = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7 }}
     >
+      <ModalMovieInformations />
+      <ModalEditProfile />
+      <ModalAddReview />
       <CommunityHeader>
         <Header isDashboard={false} />
       </CommunityHeader>
@@ -60,7 +68,7 @@ const Community = () => {
                   <button onClick={filterOpinionsSeries}>Séries</button>
                 </li>
                 <li>
-                <DetailsCategory>
+                  <DetailsCategory>
                     <div>
                       <div className="category">
                         <span>Categorias</span>

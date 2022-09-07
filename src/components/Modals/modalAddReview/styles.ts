@@ -1,100 +1,136 @@
 import styled from "styled-components";
 
+export const BackgroundModal = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 999;
+  position: fixed;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const DivModalAddReview = styled.div`
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    background-color: #383838;
-    width: 94vw;
-    height: 50vh;
-    font-family: 'Montserrat', sans-serif;
-    position: fixed;
-    padding-left: 0 auto;
-    padding: 1vh 1vw;
-    z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  background-color: #383838;
+  width: 94vw;
+  height: 60%;
+  font-family: "Montserrat", sans-serif;
+  position: fixed;
 
-@media screen and (min-width: 423px) {
-    width: 60vw;
-    margin-left: 20vw;
-}
+  padding: 1vh 1vw;
+  z-index: 1000;
 
-@media screen and (min-width: 800px) {
-    width: 30vw;
-    margin-left: 30vw;
-}
-`
+  border-radius: 8px;
+
+  @media screen and (min-width: 768px) {
+    width: 70%;
+  }
+  @media screen and (min-width: 1024px) {
+    width: 50%;
+  }
+`;
 
 export const DivMovieInformation = styled.div`
-width: 50%;
-height: 100%;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-margin-right: 4vw;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 4vw;
 
-img{
-    width: 100%;
+  border-right: 2px solid var(--grey-3);
+
+  img {
+    width: 60%;
     height: 60%;
-    margin-bottom: 2vh;
-}
+    border-radius: 5px;
+    margin-top: 5px;
+  }
 
-h1{
+  h4 {
     color: white;
     font-size: 16px;
     margin-bottom: 2vh;
-}
+    text-align: center;
+    max-width: 90%;
+  }
 
-h2{
-    color:#FFC124;
-    font-size: 20px;
-    border: 1px ridge #FFC124;
-    padding: 2px;
-}
-`
+  h5 {
+    color: #ffc124;
+    font-size: 1rem;
+  }
+`;
 
 export const DivSecondPartModalAddReview = styled.div`
-display: flex;
-align-items: flex-start;
-justify-content: flex-start;
-padding-top: 0;
-flex-direction: column;
-width: 50%;
-height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding-top: 0;
+  flex-direction: column;
+  width: 50%;
+  height: 100%;
 
-div{
+  div {
     display: flex;
     justify-content: space-between;
     width: 100%;
-}
+  }
 
-h2{
+  h2 {
     font-size: 14px;
     color: white;
-    margin-right:1%;
-}
+    margin-right: 1%;
+  }
 
-button{
+  button {
     border: none;
-    background-color:#383838;
-}
-`
+    background-color: transparent;
+
+    svg {
+      color: var(--grey-1);
+    }
+  }
+  button:hover > svg {
+    color: var(--yellow);
+    transition: 0.2s;
+  }
+  button:active {
+    transform: scale(0.98);
+
+    transition: 0.2s;
+  }
+`;
 
 export const FormAddReview = styled.form`
-display: flex;
-flex-direction: column;
-width: 100%;
-height: 100%;
-align-items: flex-start;
-padding: 1vh 0vw;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  align-items: flex-start;
+  padding: 1vh 0vw;
 
-input{
+  input {
     height: 70%;
     margin-bottom: 1vh;
     width: 90%;
-}
+    border-radius: 5px;
+    border: none;
+  }
+  input:focus {
+    outline: none;
+    transform: scale(1.03);
+    transition: 0.5s;
 
-label{
+    box-shadow: 0 0 1.5em var(--grey-4);
+  }
+
+  label {
     color: white;
     font-size: 14px;
     display: flex;
@@ -103,26 +139,35 @@ label{
     width: 100%;
     justify-content: flex-start;
     align-items: flex-start;
-}
 
-select{
+    text-align: center;
+  }
+
+  select {
     margin-top: 1vh;
-    background-color:#383838;
+    background-color: #383838;
     border: none;
-    color: #FFC124;
-}
+    color: #ffc124;
+  }
 
-option{
-    color:#FFC124;
+  option {
+    color: #ffc124;
     margin-bottom: 16px;
-}
+  }
 
-button{
-    background-color: #FFC124;
+  button {
+    background-color: var(--grey-1);
     color: black;
-    height: 15%;
-    width: 42%;
+    height: 50px;
+    width: 30%;
+    max-width: 40%;
+
     border-radius: 5px;
     font-weight: bold;
-}
-`
+  }
+  button:hover {
+    background-color: var(--yellow);
+
+    transition: 0.2s;
+  }
+`;

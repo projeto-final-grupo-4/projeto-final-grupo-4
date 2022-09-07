@@ -1,4 +1,3 @@
-import "./reset.css";
 import { useDashboardContext } from "../../../context/dashboardContext";
 import { BsXSquare, BsPlusCircle, BsChatLeft } from "react-icons/bs";
 import {
@@ -14,10 +13,8 @@ import {
 } from "./styles";
 import { useNavigate } from "react-router-dom";
 
-
 function ModalMovieInformations() {
   const navigate = useNavigate();
-
 
   const {
     setModalMovieInformations,

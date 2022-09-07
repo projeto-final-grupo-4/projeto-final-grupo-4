@@ -11,8 +11,8 @@ import {
   ButtonEditProfile,
   H1EditProfile,
 } from "./styles";
-import { BsFileX } from "react-icons/bs";
-import "./reset.css";
+import { FaWindowClose } from "react-icons/fa";
+
 import { useDashboardContext } from "../../../context/dashboardContext";
 
 import api from "../../../services/api";
@@ -38,8 +38,7 @@ function ModalEditProfile() {
 
   const formSchema = yup.object().shape({
     name: yup.string(),
-    password: yup
-      .string(),
+    password: yup.string(),
     avatar: yup.string(),
     confirmPassword: yup
       .string()
@@ -54,18 +53,16 @@ function ModalEditProfile() {
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmitFunction = (
-    data: any,
-  ) => {
+  const onSubmitFunction = (data: any) => {
     console.log(data);
-    console.log(id)
+    console.log(id);
     api
       .patch(`users/${id}`, data, {
         headers: { "Content-Type": "application/json" },
       })
       .then((response) => {
         console.log(response);
-        setModalEditProfile(false)
+        setModalEditProfile(false);
       })
       .catch((error) => console.error(error));
   };
@@ -81,7 +78,7 @@ function ModalEditProfile() {
               <ButtonCloseModalEditProfile
                 onClick={() => setModalEditProfile(false)}
               >
-                <BsFileX color="#FFC124" size={30} />
+                <FaWindowClose size={30} />
               </ButtonCloseModalEditProfile>
             </DivButtonCloseModalEditProfile>
             <H1EditProfile>Editar Perfil</H1EditProfile>

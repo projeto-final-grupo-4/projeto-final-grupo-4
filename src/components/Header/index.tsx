@@ -7,6 +7,7 @@ import Logo from "../../assets/img/logo-projeto.png";
 import Button from "../Button";
 
 import { useNavigate } from "react-router-dom";
+import { useDashboardContext } from "../../context/dashboardContext";
 
 interface IHeaderProps {
   isDashboard: boolean;
@@ -14,6 +15,7 @@ interface IHeaderProps {
 
 const Header = ({ isDashboard }: IHeaderProps) => {
   const navigate = useNavigate();
+  const{setModalEditProfile} =  useDashboardContext()
 
   return (
     <DashboardHeaderStyled>
@@ -40,7 +42,9 @@ const Header = ({ isDashboard }: IHeaderProps) => {
             <div className="details">
               <nav>
                 <ul>
-                  <li>Configurações</li>
+                  <li onClick={()=>{
+                    setModalEditProfile(true)
+                  }}>Configurações</li>
                   <li>Minha Lista</li>
                   <li>Meus Reviews</li>
                 </ul>
