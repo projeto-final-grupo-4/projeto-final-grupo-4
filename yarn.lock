@@ -2164,15 +2164,9 @@
   "version" "2.0.1"
 
 "@types/styled-components@^5.1.26":
-<<<<<<< HEAD
   "integrity" "sha512-KuKJ9Z6xb93uJiIyxo/+ksS7yLjS1KzG6iv5i78dhVg/X3u5t1H7juRWqVmodIdz6wGVaIApo1u01kmFRdJHVw=="
   "resolved" "https://registry.npmjs.org/@types/styled-components/-/styled-components-5.1.26.tgz"
   "version" "5.1.26"
-=======
-  version "5.1.26"
-  resolved "https://registry.npmjs.org/@types/styled-components/-/styled-components-5.1.26.tgz"
-  integrity sha512-KuKJ9Z6xb93uJiIyxo/+ksS7yLjS1KzG6iv5i78dhVg/X3u5t1H7juRWqVmodIdz6wGVaIApo1u01kmFRdJHVw==
->>>>>>> 9fabc0560b311f3799fcfe05f00036c9c0809e76
   dependencies:
     "@types/hoist-non-react-statics" "*"
     "@types/react" "*"
@@ -2752,17 +2746,10 @@
   "resolved" "https://registry.npmjs.org/axe-core/-/axe-core-4.4.3.tgz"
   "version" "4.4.3"
 
-<<<<<<< HEAD
 "axios@^0.27.2":
   "integrity" "sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ=="
   "resolved" "https://registry.npmjs.org/axios/-/axios-0.27.2.tgz"
   "version" "0.27.2"
-=======
-axios@^0.27.2:
-  version "0.27.2"
-  resolved "https://registry.npmjs.org/axios/-/axios-0.27.2.tgz"
-  integrity sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==
->>>>>>> 9fabc0560b311f3799fcfe05f00036c9c0809e76
   dependencies:
     "follow-redirects" "^1.14.9"
     "form-data" "^4.0.0"
@@ -8422,17 +8409,10 @@ axios@^0.27.2:
     "hey-listen" "^1.0.8"
     "tslib" "2.4.0"
 
-<<<<<<< HEAD
 "styled-components@^5.3.5", "styled-components@>= 2":
   "integrity" "sha512-ndETJ9RKaaL6q41B69WudeqLzOpY1A/ET/glXkNZ2T7dPjPqpPCXXQjDFYZWwNnE5co0wX+gTCqx9mfxTmSIPg=="
   "resolved" "https://registry.npmjs.org/styled-components/-/styled-components-5.3.5.tgz"
   "version" "5.3.5"
-=======
-styled-components@^5.3.5:
-  version "5.3.5"
-  resolved "https://registry.npmjs.org/styled-components/-/styled-components-5.3.5.tgz"
-  integrity sha512-ndETJ9RKaaL6q41B69WudeqLzOpY1A/ET/glXkNZ2T7dPjPqpPCXXQjDFYZWwNnE5co0wX+gTCqx9mfxTmSIPg==
->>>>>>> 9fabc0560b311f3799fcfe05f00036c9c0809e76
   dependencies:
     "@babel/helper-module-imports" "^7.0.0"
     "@babel/traverse" "^7.4.5"

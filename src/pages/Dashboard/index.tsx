@@ -256,13 +256,22 @@ const Dashboard = () => {
         </header>
 
         <DashboardMainStyled>
+          <ModalEditProfile />
           <h2>{title}</h2>
 
           <section>
+          <ModalAddReview />
             <ul>
               {actualSection.map((movie, index) => {
                 return (
-                  <li className="card" key={index}>
+                  <li onClick={()=> {
+                    setModalMovieInformations(true);
+                    setSelectMovie(movie.title);
+                    setSinopse(movie.sinopse);
+                    setRate(movie.rate);
+                    setVideo(movie.trailer);
+                    setPoster(movie.poster)
+                  }} className="card" key={index}>
                     <img src={movie.poster} alt={movie.title} />
                     <div className="button_box">
                       <button>

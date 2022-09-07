@@ -15,11 +15,12 @@ export interface ILogin {
   email: string;
   password: string;
   avatar: string;
+  confirmPassword: string;
   watch_later: [];
 }
 
 const FormLogin = () => {
-
+  const [typePassword, setTypePassword] = useState("password")
   const navigate = useNavigate();
 
   const schema = yup.object({
@@ -54,8 +55,8 @@ const FormLogin = () => {
     const users: any[] | null[] = await signIn();
     console.log(users.length);
     const obj = users.find(
-      (item: { email: string; password: string }) =>
-        item.email === data.email && item.password === data.password
+      (item: { email: string; confirmPassword: string }) =>
+        item.email === data.email && item.confirmPassword === data.password
     );
     if (obj !== undefined) {
       localStorage.setItem("@USERID", `${obj.id}`);
