@@ -13,7 +13,6 @@ export const DashboardStyled = styled.div`
   }
 `;
 
-
 export const DashboardHeaderStyled = styled.div`
   background-color: var(--grey-2);
   color: var(--yellow);
@@ -124,9 +123,9 @@ export const Details = styled.div`
     border: none;
     font-size: 12px;
     font-weight: 500;
-    font-family: 'Montserrat', sans serif;
+    font-family: "Montserrat", sans serif;
   }
-`
+`;
 
 export const DetailsCategory = styled.div`
   position: relative;

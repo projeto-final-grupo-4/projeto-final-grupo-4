@@ -1,4 +1,4 @@
-import {useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../../services/api";
 
 import {
@@ -15,15 +15,12 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { FaRegPlayCircle } from "react-icons/fa";
 import { BsFillGearFill, BsCardList, BsChatLeft } from "react-icons/bs";
 
-
-
-
 import ModalEditProfile from "../../components/Modals/modalEditProfile";
 import ModalMovieInformations from "../../components/Modals/modalMovieInformations";
 import ModalAddReview from "../../components/Modals/modalAddReview";
 
 import { IData, useDashboardContext } from "../../context/dashboardContext";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 
 import { motion } from "framer-motion";
@@ -89,77 +86,77 @@ const Dashboard = () => {
   }, []);
 
   return (
-
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.7 }}
     >
-    <DashboardStyled>
-      <ModalMovieInformations />
-      <header>
-        <Header isDashboard={true} />
-        <DashboardSubHeaderStyled>
-          <div>
-            <nav>
-              <ul>
-                <li>
-                  <button
-                    className="navigation_buttons"
-                    onClick={() => {
-                      setActualSection(movies);
-                      setTitle("Filmes");
-                    }}
-                  >
-                    Filmes
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="navigation_buttons"
-                    onClick={() => {
-                      setActualSection(series);
-                      setTitle("Séries");
-                    }}
-                  >
-                    Séries
-                  </button>
-                </li>
-                <li>
-                  <DetailsCategory>
-                    <div>
-                      <div className="category">
-                        <span>Categorias</span>
-                      </div>
-                      <div className="details_category">
-                        <nav>
-                          <ul>
-                            <li
-                              onClick={() => {
-                                setActualSection(() =>
-                                  all.filter(
-                                    (element) => element.genre === "acao"
-                                  )
-                                );
-                                setTitle("Ação");
-                              }}
-                            >
-                              Ação
-                            </li>
-                            <li
-                              onClick={() => {
-                                setActualSection(() =>
-                                  all.filter(
-                                    (element) => element.genre === "suspense"
-                                  )
-                                );
-                                setTitle("Suspense");
-                              }}
-                            >
-                              Suspense
-                            </li>
-
+      <DashboardStyled>
+        <ModalMovieInformations />
+        <ModalEditProfile />
+        <ModalAddReview />
+        <header>
+          <Header isDashboard={true} />
+          <DashboardSubHeaderStyled>
+            <div>
+              <nav>
+                <ul>
+                  <li>
+                    <button
+                      className="navigation_buttons"
+                      onClick={() => {
+                        setActualSection(movies);
+                        setTitle("Filmes");
+                      }}
+                    >
+                      Filmes
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="navigation_buttons"
+                      onClick={() => {
+                        setActualSection(series);
+                        setTitle("Séries");
+                      }}
+                    >
+                      Séries
+                    </button>
+                  </li>
+                  <li>
+                    <DetailsCategory>
+                      <div>
+                        <div className="category">
+                          <span>Categorias</span>
+                        </div>
+                        <div className="details_category">
+                          <nav>
+                            <ul>
+                              <li
+                                onClick={() => {
+                                  setActualSection(() =>
+                                    all.filter(
+                                      (element) => element.genre === "acao"
+                                    )
+                                  );
+                                  setTitle("Ação");
+                                }}
+                              >
+                                Ação
+                              </li>
+                              <li
+                                onClick={() => {
+                                  setActualSection(() =>
+                                    all.filter(
+                                      (element) => element.genre === "suspense"
+                                    )
+                                  );
+                                  setTitle("Suspense");
+                                }}
+                              >
+                                Suspense
+                              </li>
 
                               <li
                                 onClick={() => {
@@ -256,22 +253,24 @@ const Dashboard = () => {
         </header>
 
         <DashboardMainStyled>
-          <ModalEditProfile />
           <h2>{title}</h2>
 
           <section>
-          <ModalAddReview />
             <ul>
               {actualSection.map((movie, index) => {
                 return (
-                  <li onClick={()=> {
-                    setModalMovieInformations(true);
-                    setSelectMovie(movie.title);
-                    setSinopse(movie.sinopse);
-                    setRate(movie.rate);
-                    setVideo(movie.trailer);
-                    setPoster(movie.poster)
-                  }} className="card" key={index}>
+                  <li
+                    onClick={() => {
+                      setModalMovieInformations(true);
+                      setSelectMovie(movie.title);
+                      setSinopse(movie.sinopse);
+                      setRate(movie.rate);
+                      setVideo(movie.trailer);
+                      setPoster(movie.poster);
+                    }}
+                    className="card"
+                    key={index}
+                  >
                     <img src={movie.poster} alt={movie.title} />
                     <div className="button_box">
                       <button>
