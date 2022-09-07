@@ -33,7 +33,6 @@ export interface IUserContext {
 
 const FormRegister = () => {
   const [typePassword, setTypePassword] = useState<string>("password");
-  const [typeConfirmPassword, setTypeConfirmPassword] = useState<string>("password")
 
   const navigate = useNavigate();
 
@@ -61,13 +60,13 @@ const FormRegister = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<IUser>({
     resolver: yupResolver(schema),
   });
 
   const onSubmit = (data: FieldValue<IUserContext>) => {
-    console.log(data);
     api
       .post("users", data)
       .then((response) => {
@@ -115,7 +114,9 @@ const FormRegister = () => {
           {...register("confirmPassword")}
         />
         <span>{errors.password?.message}</span>
-        <ButtonRegister type="submit">Cadastrar</ButtonRegister>
+        <ButtonRegister onClick={()=>{
+          setValue("watch_later",[])
+        }} type="submit">Cadastrar</ButtonRegister>
       </RegisterForm>
     </>
   );

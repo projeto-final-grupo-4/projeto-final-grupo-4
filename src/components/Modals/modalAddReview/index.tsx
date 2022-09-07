@@ -1,6 +1,5 @@
 import './reset.css'
 import { useDashboardContext } from "../../../context/dashboardContext";
-/*import { CommunityContext } from "../../context/CommunityContext";*/
 import { BsXSquare } from 'react-icons/bs'
 import api from '../../../services/api';
 import { useContext } from 'react';
@@ -8,12 +7,17 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { DivModalAddReview, DivMovieInformation, DivSecondPartModalAddReview, FormAddReview } from './styles'
+import { CommunityContext,} from '../../../context/CommunityContext';
 
 interface IOpinion {
     content: string;
+    id?: number | string;
     rate: number;
+    moviesId: number,
+    seriesId: number,
+    usersId: number
 }
-function ModalAddReview() {
+function ModalAddReview() { 
 
     const formSchema = yup.object().shape({
         content: yup.string().required("Opinião obrigatória"),
@@ -23,49 +27,86 @@ function ModalAddReview() {
     const {
         register,
         handleSubmit,
+        setValue
     } = useForm<IOpinion>({
         resolver: yupResolver(formSchema),
     });
 
-    const onSubmitFunction = (data: any) => {
-        console.log('chguei')
-        api.post('opinions', data)
-            .then((response) => {
-                console.log(response);
-                setModalAddReview(false)
+    
+    const getMovies =  async () => {
+        await api.get("movies")
+        .then(response => setMovies(response.data))
+        .catch(err => console.log(err))
+    }
+    const getOpinions =  async() => {
+        await api.get("opinions")
+        .then(response =>  {
+            console.log(response.data)
+            setOpinionsAll(response.data)}) 
+        .catch(err => console.log(err)) 
+    }
+    const getSeries = async () => {
+        await api.get("series")
+        .then(response => setSeries(response.data))
+        .catch(err => console.log(err)
+        )
+    }
+    const getUsers = async () => {
+        await api.get("users")
+        .then(response => setUsers(response.data))
+        .catch(err => console.log(err) )
+    }
 
+
+    const onSubmitFunction =   async (data: any) => {
+        await api.post('opinions', data)
+            .then((response) => {
+                setModalAddReview(false)
             })
             .catch((err) => {
                 console.log(err)
             });
+
+            await getMovies()
+            await getOpinions()
+            await getSeries()
+            getUsers() 
     }
-
-    /*const {
-        opinions,
-        setOpinions
-    } = useContext(CommunityContext);*/
-
+    const {
+        movies,
+        series,
+        setOpinionsAll,
+        setUsers
+    } = useContext(CommunityContext);
+    
     const {
         setModalAddReview,
         modalAddReview,
         selectMovie,
         rate,
-        poster
+        poster,
+        setMovies,
+        setSeries
     } = useDashboardContext();
-
+    const moviesFind:any= movies.find(item=> item.title === selectMovie)
+    console.log(moviesFind)
+    console.log(selectMovie)
     if (modalAddReview === false) {
         return (
             null
         )
     }
-
+    
+ 
     else {
         return (
             <>
+                
                 <DivModalAddReview>
                     <DivMovieInformation>
                         <img src={poster} alt="Poster"></img>
                         <h1>{selectMovie}</h1>
+                       
                         <h2>Nota &nbsp;{rate}</h2>
                     </DivMovieInformation>
                     <DivSecondPartModalAddReview>
@@ -84,7 +125,19 @@ function ModalAddReview() {
                                     <option value="1">&#9733;</option>
                                 </select>
                             </label>
-                            <button type="submit">Enviar</button>
+                            <button onClick={(e)=> {
+                                if (moviesFind !== undefined){
+                                    setValue("usersId",parseInt(localStorage.getItem("@USERID")|| ""))
+                                    setValue("moviesId",moviesFind.id)
+                                    setValue("seriesId",0)
+                                } else {
+                                    const getSeries:any = series.find(item=> item.title === selectMovie)
+                                    setValue("usersId",parseInt(localStorage.getItem("@USERID")|| ""))
+                                    setValue("moviesId",0)
+                                    setValue("seriesId",getSeries.id)
+                                }
+                                 
+                            }} type="submit">Enviar</button>
                         </FormAddReview>
                     </DivSecondPartModalAddReview>
                 </DivModalAddReview>

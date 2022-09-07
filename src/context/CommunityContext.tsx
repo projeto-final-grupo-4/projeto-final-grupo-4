@@ -15,6 +15,7 @@ export interface IAxiosData {
 }
 
 export interface IAxiosMovieData {
+  name: string;
   id: number;
   title: string;
   sinopse: string;
@@ -45,6 +46,7 @@ interface IProviderProps {
   loading: boolean;
   opinionsAll: IAxiosData[];
   setOpinionsAll: React.Dispatch<React.SetStateAction<IAxiosData[]>>;
+  setUsers: React.Dispatch<React.SetStateAction<IAxiosUsersData[]>>;
 }
 
 export const CommunityContext = createContext<IProviderProps>(
@@ -108,7 +110,8 @@ const CommunityProvider = ({ children }: IContextProps) => {
         loading,
         users,
         opinionsAll,
-        setOpinionsAll
+        setOpinionsAll,
+        setUsers
       }}
     >
       {children}
