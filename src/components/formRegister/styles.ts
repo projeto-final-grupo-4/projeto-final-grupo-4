@@ -48,10 +48,17 @@ export const RegisterForm = styled.form`
     background-color: transparent;
     color: #000;
     position: absolute;
-    top: 382px;
+    top: 375px;
     left: 295px;
     font-size: 17px;
     cursor: pointer;
+    }
+    
+    .linkLogin {
+        color: var(--yellow);
+        font-weight: 600;
+        padding-top: 10px;
+        text-decoration: none;
     }
 `
 
@@ -64,7 +71,7 @@ export const ButtonRegister = styled.button`
     width: 116px;
     height: 34px;
     cursor: pointer;
-    margin-top: 40px
+    margin-top: 25px;
 `
 
 export const Button = styled.button`

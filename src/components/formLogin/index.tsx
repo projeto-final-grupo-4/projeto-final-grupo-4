@@ -86,8 +86,6 @@ const FormLogin = () => {
     }
   };
 
-
-
    const showPassword = (e: any) => {
     e.preventDefault();
     setTypePassword("text");

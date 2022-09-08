@@ -56,7 +56,7 @@ const Dashboard = () => {
       navigate("/login");
     }
 
-    async function teste() {
+    async function loadContent() {
       async function loadMovies() {
         await api
           .get("movies")
@@ -82,7 +82,7 @@ const Dashboard = () => {
       }
       await loadMovies();
     }
-    teste();
+    loadContent();
   }, []);
 
   return (

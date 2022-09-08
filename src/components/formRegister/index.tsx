@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { RegisterForm, ButtonRegister } from "./styles";
 import api from "../../services/api";
 import { FieldValue } from "react-hook-form";
@@ -145,6 +145,9 @@ const FormRegister = () => {
           {...register("confirmPassword")}
         />
         <span>{errors.password?.message}</span>
+        <Link to={"/login"} className="linkLogin">
+          Já possui uma conta?
+        </Link>
         <ButtonRegister onClick={()=>{
           setValue("watch_later",[])
         }} type="submit">Cadastrar</ButtonRegister>
