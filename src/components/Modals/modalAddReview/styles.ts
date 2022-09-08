@@ -115,12 +115,14 @@ export const FormAddReview = styled.form`
   align-items: flex-start;
   padding: 1vh 0vw;
 
-  input {
+  textarea {
     height: 70%;
     margin-bottom: 1vh;
     width: 90%;
     border-radius: 5px;
     border: none;
+    font-family: "Montserrat", sans-serif;
+    resize: none;
   }
   input:focus {
     outline: none;

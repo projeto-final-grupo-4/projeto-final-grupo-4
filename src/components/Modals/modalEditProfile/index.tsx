@@ -1,4 +1,3 @@
-import React, { BaseSyntheticEvent } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -17,8 +16,7 @@ import { useDashboardContext } from "../../../context/dashboardContext";
 
 import api from "../../../services/api";
 import { SubmitHandler } from "react-hook-form";
-import { type } from "@testing-library/user-event/dist/type";
-import { json } from "stream/consumers";
+
 
 function ModalEditProfile() {
   const id = localStorage.getItem("@USERID");

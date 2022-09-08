@@ -110,7 +110,7 @@ function ModalAddReview() {
               </button>
             </div>
             <FormAddReview onSubmit={handleSubmit(onSubmitFunction)}>
-              <input {...register("content")}></input>
+              <textarea{...register("content")}></textarea>
               <label>
                 Qual a sua nota para essa obra?
                 <select {...register("rate")}>

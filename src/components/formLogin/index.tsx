@@ -55,8 +55,9 @@ const FormLogin = () => {
     const users: any[] | null[] = await signIn();
     console.log(users.length);
     const obj = users.find(
-      (item: { email: string; confirmPassword: string }) =>
+      (item: { email: string; confirmPassword: string; password: string }) =>
         item.email === data.email && item.confirmPassword === data.password
+        ||   item.email === data.email && item.password === data.password
     );
     if (obj !== undefined) {
       localStorage.setItem("@USERID", `${obj.id}`);

@@ -31,7 +31,7 @@ export const DivScreenMovie = styled.div`
 
   @media screen and (min-width: 1000px) {
     width: 70%;
-    /* height: 60vh; */
+    height: 60vh;
     height: fit-content;
   }
 `;
@@ -75,6 +75,28 @@ export const DivInformationsMovie = styled.div`
   height: 30vh;
   padding: 5px;
   overflow: auto;
+  margin-bottom: 1.5%;  
+
+  ::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--grey-3); 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--yellow);
+  border-radius:  12px;
+  cursor: pointer;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
 
   @media screen and (min-width: 769px) {
     width: 69%;
