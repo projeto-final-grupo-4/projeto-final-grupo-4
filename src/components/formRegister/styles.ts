@@ -48,7 +48,7 @@ export const RegisterForm = styled.form`
     background-color: transparent;
     color: #000;
     position: absolute;
-    top: 358px;
+    top: 382px;
     left: 295px;
     font-size: 17px;
     cursor: pointer;
